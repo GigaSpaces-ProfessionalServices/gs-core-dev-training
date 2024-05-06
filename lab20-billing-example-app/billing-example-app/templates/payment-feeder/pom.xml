@@ -1,0 +1,56 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.gigaspaces.dev.training</groupId>
+    <artifactId>payment-feeder</artifactId>
+    <version>{{app.version}}</version>
+    <name>payment-feeder</name>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>{{spring.boot.version}}</version>
+        <relativePath/>
+    </parent>
+
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <gigaspaces.version>{{gigaspaces.version}}</gigaspaces.version>
+        <spring.boot.version>{{spring.boot.version}}</spring.boot.version>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>org.openspaces</id>
+            <url>https://maven-repository.openspaces.org</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.gigaspaces</groupId>
+            <artifactId>xap-openspaces</artifactId>
+            <version>${gigaspaces.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gigaspaces.dev.training</groupId>
+            <artifactId>model</artifactId>
+            <version>{{app.version}}</version>
+            <scope>compile</scope>
+        </dependency>
+
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>
