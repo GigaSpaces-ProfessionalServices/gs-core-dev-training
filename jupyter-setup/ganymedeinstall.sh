@@ -8,7 +8,6 @@ JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
 GANYMEDE_JAR="ganymede-2.1.2.20230910.jar"
 
 $JAVA_HOME/bin/java \
-      -Dcom.gs.jini_lus.locators="localhost" \
       -jar $GANYMEDE_JAR \
       -i \
       --id-suffix=gs-dev-lab-1.0 --display-name-suffix="with gs-dev-lab 1.0"
