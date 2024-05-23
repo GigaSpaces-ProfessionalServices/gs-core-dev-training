@@ -15,7 +15,7 @@
 2. [Maven](https://maven.apache.org/install.html)
 3. `curl` command line client url
 4. Java IDE such as [Intellij Community Edition](https://www.jetbrains.com/idea/download/)
-5. [Docker](https://docs.docker.com/engine/install/)
+5. Docker [installation](https://docs.docker.com/engine/install/), Docker [personal access token](https://docs.docker.com/security/for-developers/access-tokens/)
 6. Kubernetes environment for example [minikube](https://minikube.sigs.k8s.io/docs/start/), but any k8s environment can work.
 7. [helm](https://helm.sh/docs/intro/install/)
 8. GigaSpaces installation for local testing.
@@ -111,3 +111,14 @@ Start the service grid
    *The REST application is used for reporting on the billing application*
 5. Visit this [page](notes.md) for a list of curl commands that can be run.
 
+## 4. Troubleshooting
+
+##### Note 1 - minikube image pull error
+`Failed to pull image "<image name>": rpc error: code = Unknown desc = context deadline exceeded`
+
+This happens when the image pull process is times out. The workaround is to download the image beforehand.
+
+A suggestion is to use `minikube ssh docker pull`, for example,    
+`minikube ssh docker pull <image name>`  
+
+See: [https://github.com/kubernetes/minikube/issues/14806]
