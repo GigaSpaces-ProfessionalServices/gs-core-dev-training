@@ -25,7 +25,7 @@
         <dependency>
             <groupId>org.gigaspaces</groupId>
             <artifactId>xap-openspaces</artifactId>
-            <version>${gsVersion}</version>
+            <version>${gigaspaces.version}</version>
             <!-- change the scope from the parent to ensure no gs libraries get packaged in mirror jar -->
             <scope>provided</scope>
         </dependency>

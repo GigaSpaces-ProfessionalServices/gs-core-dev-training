@@ -30,6 +30,7 @@
 
 1. Run `scripts-k8s/deploy-k8s.sh`  
 *This will set up the helm repository, install the Manager, operator and space.*
+
 You can verify with the following:
 ```
 $ helm list
@@ -38,6 +39,33 @@ manager  	default  	1       	2024-03-26 13:58:14.976120909 -0400 EDT	deployed	xa
 operator 	default  	1       	2024-03-26 13:58:23.440944168 -0400 EDT	deployed	xap-operator-16.4.0	           
 processor	default  	1       	2024-03-26 13:58:32.081939187 -0400 EDT	deployed	xap-pu-16.4.0      	
 ```
+```
+$ kubectl get all
+NAME                                READY   STATUS    RESTARTS        AGE
+pod/processor-xap-pu-0              1/1     Running   3 (2m26s ago)   6h25m
+pod/xap-manager-0                   1/1     Running   0               17s
+pod/xap-operator-5d8958869d-bxv79   1/1     Running   0               11s
+
+NAME                          TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)                               AGE
+service/kubernetes            ClusterIP   10.96.0.1        <none>        443/TCP                               48d
+service/manager-np            NodePort    10.101.148.130   <none>        8090:31238/TCP                        16s
+service/processor-xap-pu-hs   ClusterIP   None             <none>        <none>                                6h26m
+service/webhook-server        ClusterIP   10.98.183.188    <none>        8443/TCP                              11s
+service/xap-manager-hs        ClusterIP   None             <none>        2181/TCP,2888/TCP,3888/TCP,4174/TCP   18s
+service/xap-manager-service   ClusterIP   10.99.255.124    <none>        8090/TCP,4174/TCP                     18s
+
+NAME                           READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/xap-operator   1/1     1            1           11s
+
+NAME                                      DESIRED   CURRENT   READY   AGE
+replicaset.apps/xap-operator-5d8958869d   1         1         1       11s
+
+NAME                                READY   AGE
+statefulset.apps/processor-xap-pu   1/1     6h25m
+statefulset.apps/xap-manager        1/1     17s
+```
+*The first time it is run it may take a few minutes. Continue to the next step when you see the pods are running.*
+
 2. Run the `scripts-k8s/payment-feeder.sh`  
 *This will set up the payment feeder job.*
 3. Run the `scripts-k8s/rest-app.sh`  
@@ -80,7 +108,16 @@ job.batch/payment-feeder   0/1           4m31s      4m31s
 ## 3. Validation on Kubernetes environment
 
 ### minikube
-1. `minikube service manager-np --url` will give access to ops-ui. The url to access the NodePort will be returned. Copy the url and paste in your browser's url bar.  
+
+If running on minikube, you can get access to the service's NodePort using `minikube service <service name> --url`
+
+| Service | Description | Command |
+| ----- | ----- | -----|
+| xap-manager | Ops-UI | `minikube service manager-np --url`|
+| rest-app | Use curl to access it | `minikube service rest-app --url` |
+
+
+1. Copy the xap-manager url and paste in your browser's url bar.  
 Click on 'Monitor my services' | click on the 'processor' service | click on the 'Space:processor-space' button (top right corner).  
 You should see a list of types. See screenshot below.  
 ![Screenshot of types](Pictures/ops_ui-types.png)
@@ -88,14 +125,13 @@ You should see a list of types. See screenshot below.
 2. You can also run queries from the ops-ui. Choose the 'SQL Editor' pane. We have run `SELECT * from "com.mycompany.app.model.User" LIMIT 10`
 ![Screenshot of query](Pictures/ops_ui-query.png)
 3. You can check the rest application by running curl commands against it.  
-If running on minikube, you can get access to tne rest application service's NodePort using  
-`minikube service manager-np --url`  
-Visit this [page](notes.md) for a list of curl commands that can be run.
+
+Visit this [page](example_curl_commands.md) for a list of curl commands that can be run.
 
 ## Other Kubernetes environment
 1. To get access to the ops ui, `kubectl port-forward svc/xap-manager-service 8090:8090`. The ops-ui should be available on `localhost:8090`. Check the minikube section above for notes on the ops-ui.
 2. For the rest application, `kubectl port-forward deployment/rest-app 8080:8080`.  
-Visit this [page](notes.md) for a list of curl commands that can be run.
+Visit this [page](example_curl_commands.md) for a list of curl commands that can be run.
 
 ## 3. Run on local desktop
 
@@ -109,7 +145,7 @@ Start the service grid
    *This creates the users and the merchants. It also runs continuously, simulating payments transactions*
 4. Deploy the REST application. In a new console window, run `scripts/run-rest-app.sh`  
    *The REST application is used for reporting on the billing application*
-5. Visit this [page](notes.md) for a list of curl commands that can be run.
+5. Visit this [page](example_curl_commands.md) for a list of curl commands that can be run.
 
 ## 4. Troubleshooting
 
