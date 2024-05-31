@@ -1,0 +1,1 @@
+The .png files should not be stored under the blueprint directory. The blueprint generator seems to try to parse the .png files and will generate an error.

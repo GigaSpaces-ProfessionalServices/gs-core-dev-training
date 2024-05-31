@@ -2,24 +2,25 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.gigaspaces.dev.training</groupId>
-    <artifactId>model</artifactId>
+    <artifactId>processor</artifactId>
     <packaging>jar</packaging>
     <version>{{app.version}}</version>
-    <name>model</name>
+    <name>processor</name>
     <parent>
         <groupId>com.gigaspaces.dev.training</groupId>
-        <artifactId>lab04-guide</artifactId>
+        <artifactId>lab20-guide</artifactId>
         <version>{{app.version}}</version>
     </parent>
     <dependencies>
         <dependency>
-            <groupId>jakarta.persistence</groupId>
-            <artifactId>jakarta.persistence-api</artifactId>
-            <version>3.1.0</version>
+            <groupId>com.gigaspaces.dev.training</groupId>
+            <artifactId>model</artifactId>
+            <version>{{app.version}}</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
     <build>
-        <finalName>model</finalName>
+        <finalName>processor</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
@@ -45,3 +46,4 @@
         </plugins>
     </build>
 </project>
+
