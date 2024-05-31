@@ -8,7 +8,7 @@
     <name>current-profit-distributed-executor</name>
     <parent>
         <groupId>com.gigaspaces.dev.training</groupId>
-        <artifactId>lab04-guide</artifactId>
+        <artifactId>lab20-guide</artifactId>
         <version>{{app.version}}</version>
     </parent>
     <properties>

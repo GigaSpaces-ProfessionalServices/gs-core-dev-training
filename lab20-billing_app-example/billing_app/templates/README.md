@@ -1,4 +1,4 @@
-# Bill Payment Example
+# Example Bill Payment Application
 
 ---
 
@@ -120,10 +120,10 @@ If running on minikube, you can get access to the service's NodePort using `mini
 1. Copy the xap-manager url and paste in your browser's url bar.  
 Click on 'Monitor my services' | click on the 'processor' service | click on the 'Space:processor-space' button (top right corner).  
 You should see a list of types. See screenshot below.  
-![Screenshot of types](Pictures/ops_ui-types.png)
+![Screenshot of types](https://github.com/GigaSpaces-ProfessionalServices/gs-dev-training-stage/blob/main/lab20-billing_app-example/Pictures/ops_ui-types.png)
 
 2. You can also run queries from the ops-ui. Choose the 'SQL Editor' pane. We have run `SELECT * from "com.mycompany.app.model.User" LIMIT 10`
-![Screenshot of query](Pictures/ops_ui-query.png)
+![Screenshot of query](https://github.com/GigaSpaces-ProfessionalServices/gs-dev-training-stage/blob/main/lab20-billing_app-example/Pictures/ops_ui-query.png)
 3. You can check the rest application by running curl commands against it.  
 
 Visit this [page](example_curl_commands.md) for a list of curl commands that can be run.
@@ -144,12 +144,28 @@ Start the service grid
 3. Deploy the feeder. In a new console window, run `scripts/run-feeder.sh`  
    *This creates the users and the merchants. It also runs continuously, simulating payments transactions*
 4. Deploy the REST application. In a new console window, run `scripts/run-rest-app.sh`  
-   *The REST application is used for reporting on the billing application*
+   *The REST application is used for reporting on the bill payment application*
 5. Visit this [page](example_curl_commands.md) for a list of curl commands that can be run.
 
 ## 4. Troubleshooting
 
-##### Note 1 - minikube image pull error
+##### Note 1 - minikube commands
+
+```
+# start minikube
+minikube start
+
+# stop minikube
+minikube stop
+
+# start the web based console
+minikube dashboard
+
+# delete the minikube cluster completely
+minikube delete --all=true --purge=true
+```
+
+##### Note 2 - minikube image pull error
 `Failed to pull image "<image name>": rpc error: code = Unknown desc = context deadline exceeded`
 
 This happens when the image pull process is times out. The workaround is to download the image beforehand.
@@ -158,3 +174,4 @@ A suggestion is to use `minikube ssh docker pull`, for example,
 `minikube ssh docker pull <image name>`  
 
 See: [https://github.com/kubernetes/minikube/issues/14806]
+
