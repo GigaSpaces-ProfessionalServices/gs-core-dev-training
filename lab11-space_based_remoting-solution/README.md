@@ -83,7 +83,7 @@ The reducer class is almost fully implemented. <br />
 >a.	Expand the BillBuddyCountPaymentByCategoryRemoteService project. <br />
 b.	Locate the com.gs.billbuddy.report.CountPaymentByCategoryReport. <br />
 c.	Follow the //TO DO comments in the file. <br />
-d.	Deploy the BillBuddy_Space PU to the Grid Service <br /> 
+d.	Deploy the BillBuddy_Space PU to the Service Grid. <br /> 
 e.	Run AccountFeeder and PaymentFeeder (using the RunConfigurations in Intellij) <br />
 f.	Run the **BillBuddyCountPaymentByCategoryRemoteService** (using the RunConfigurations in Intellij or by deploying the Processing Unit jar file) and examine your results. 
 
