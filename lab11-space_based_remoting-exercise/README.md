@@ -13,7 +13,15 @@ This lab includes 3 exercises:
 ## 1 Lab setup
 Make sure you restart the service grid and gs-ui (or at least undeploy all Processing Units using gs-ui)
 
-**1.1** Open gs-dev-training/lab11-space_based_remoting-exercise project with intellij (open pom.xml)<br>
+```
+$GS_HOME/bin/gs.sh host run-agent --auto --gsc=6
+```
+In another console window,
+```
+$GS_HOME/bin/gs-ui.sh
+```
+
+**1.1** Open gs-dev-training/lab11-space_based_remoting-exercise project with Intellij (open pom.xml)<br>
 **1.2** Run mvn package
 
     ~/gs-dev-training/lab11-space_based_remoting-exercise$ mvn package
@@ -38,7 +46,7 @@ Make sure you restart the service grid and gs-ui (or at least undeploy all Proce
 ## 2	Investigate a space based remoting service
 In this exercise we will examine an existing remote service code. 
 You will not have to do much coding in this exercise. <br /> 
-**2.1**	Expand the BillBuddyCategoryTop5PaymentRemoteService project. <br /> 
+**2.1**	Expand the **BillBuddyCategoryTop5PaymentRemoteService** project. <br /> 
 **2.2**	Add Remoting annotation support to your space (Hint pu.xml at BillBuddy-space). <br />
 **2.3**	BillBuddy requires a Top 5 Payments per category query. 
 The service was implemented. Please answer the following questions about the remote service: <br />
@@ -46,15 +54,13 @@ The service was implemented. Please answer the following questions about the rem
 >a.	Where is the service interface located? In which project? Why? Locate it please. <br /> 
 b.	Where is the actual Remote Service code located? Why? Locate it please. <br />
 c.	Where is client code located? Locate it please. <br />
-d.	Why is the CategoryTop5PaymentReducernot located with the service? <br />
+d.	Why is the CategoryTop5PaymentReducer not located with the service? <br />
 e.	Can you assign a different type of Reducer to the same Remote Service?
 f.	Is the service implemented as Executor Based Remoting? Or is it implemented as Event Based Remoting?
 
 ## 3	Develop a Distributed Executor Based Remoting
 **3.1**	BillBuddy is required to generate a “Payment Count Per Category” report. 
 A Payment Count report includes a count of all the payments made in a specific category.
-You have already implemented that functionality as a distributed task in the previous lab 
-and now you will refactor it to be a Space Based Remoting deployment in the space. 
 The BillBuddyCountPaymentByCategoryDistributedExecutor project is provided as part of the Lab. 
 You can use it in order to complete any coding gaps you might have. <br />
 **3.2**	 Expand the BillBuddyModelproject. <br /> 
@@ -77,9 +83,9 @@ The reducer class is almost fully implemented. <br />
 >a.	Expand the BillBuddyCountPaymentByCategoryRemoteService project. <br />
 b.	Locate the com.gs.billbuddy.report.CountPaymentByCategoryReport. <br />
 c.	Follow the //TO DO comments in the file. <br />
-d.	Deploy the BillBuddy_Space PU to the Grid Service followed: <br /> 
-e.	Run AccountFeeder and PaymentFeeder. <br />
-f.	Run the BillBuddyCountPaymentByCategoryRemoteService and examine your results. 
+d.	Deploy the BillBuddy_Space PU to the Service Grid.<br /> 
+e.	Run AccountFeeder and PaymentFeeder (using the RunConfigurations in Intellij). <br />
+f.	Run the **BillBuddyCountPaymentByCategoryRemoteService** (using the RunConfigurations in Intellij or by deploying the Processing Unit jar file) and examine your results. 
 
 ## 4	Develop Executor Based Remoting using @routing
 **4.1**	BillBuddy requires a profit report for a random merchant. 
@@ -99,5 +105,5 @@ Use the IMerchantProfitService interface to return the profit for the random Mer
 
 **4.5**	Deploy the BillBuddy_Space PU to the Grid Service followed by 
 AccountFeeder and PaymentFeeder. <br />
-**4.6**	Run and test the BillBuddyMerchantProfitRemoteService service.
+**4.6**	Run and test the **BillBuddyMerchantProfitRemoteService** service (using the RunConfigurations in Intellij or by deploying the Processing Unit jar file).
 
