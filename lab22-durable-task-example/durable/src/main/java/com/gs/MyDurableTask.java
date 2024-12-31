@@ -60,5 +60,5 @@ public class MyDurableTask implements  DurableTask<Integer, Long> {
         return "longRunningJob";
     }
 
-    public String description(){ return "this task is responsble of collecting statitics related to ...";}
+    public String description(){ return "this task is responsble of iterating over all objects and gather statitics related to ...";}
 }
