@@ -12,4 +12,4 @@ $JAVA_HOME/bin/java \
       -i \
       --id-suffix=gs-dev-lab-1.0 --display-name-suffix="with gs-dev-lab 1.0"
 
-# run jupyter notebook from the same directory where gs-dev-jupyter-lab is located
+# run jupyter notebook from the same directory where gs-dev-jupyter-lab is located 
