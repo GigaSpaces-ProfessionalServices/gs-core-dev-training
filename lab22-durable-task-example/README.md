@@ -2,7 +2,7 @@
 
 ---
 
-## durable tasks exampl
+## Durable tasks example
 ###### Goals
 1. understand 2 use cases of durable tasks
 2. learn the related java and rest api
