@@ -1,4 +1,4 @@
-# gs-dev-training
+# gs-core-dev-training
 
 Before you start please verify that you have on your machine the following:
 
