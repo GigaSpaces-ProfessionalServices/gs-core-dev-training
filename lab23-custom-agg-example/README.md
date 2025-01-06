@@ -1,11 +1,11 @@
-# gs-dev-training - lab22-durable tasks example
+# gs-core-dev-training - lab22-custom aggregation example
 
 ---
 
-## cusom aggrgation example
+## custom aggregation example
 ###### Goals
-1. Understand custom aggregation
-2. Learn thow to use index data in custom aggrgators
+1. Understand custom aggregation.
+2. Learn how to use index data in custom aggregators
   
 
 ###### Instructions
