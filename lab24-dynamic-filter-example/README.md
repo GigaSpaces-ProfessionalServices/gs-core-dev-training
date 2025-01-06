@@ -1,11 +1,11 @@
-# gs-dev-training - lab22-durable tasks example
+# gs-core-dev-training - lab24-dynamic filter example
 
 ---
 
-## cusom aggrgation example
+## dynamic filter example
 ###### Goals
-1. Understand dynamic filter hint 
-2. Learn thow to use dynamic filter hint
+1. Understand dynamic filter hint.
+2. Learn how to use dynamic filter hint.
   
 
 ###### Instructions
@@ -34,7 +34,7 @@ export GS_OPTIONS_EXT="-Dcom.gs.protectiveMode.queryWithoutIndex=false"
 8. Go over TestDynamicHint code
 9. Run TestDynamicHint
 
-See that run without the hint with no routing it take much longer in this case and protective warning is logged
-While running the same with the hint no protective warning is logged as condition are implicitly added 
-If model is changed so routing of StudentCourses amd Courses is courseId as in model2 
+See that run without the hint with no routing it takes much longer in this scenario and protective warning is logged.
+While running the same with the hint, no protective warning is logged as conditions are implicitly added. 
+If model is changed so routing of StudentCourses and Courses is courseId as in model2 
 and condition for studentId is explicitly added in StudentCourses 
