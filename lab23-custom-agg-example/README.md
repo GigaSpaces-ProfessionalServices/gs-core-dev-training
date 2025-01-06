@@ -1,4 +1,4 @@
-# gs-core-dev-training - lab22-custom aggregation example
+# gs-core-dev-training - lab23-custom aggregation example
 
 ---
 
