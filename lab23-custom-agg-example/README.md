@@ -28,5 +28,5 @@
    Please see the main [README.md](https://github.com/GigaSpaces-ProfessionalServices/gs-dev-training/blob/main/README.md) for setting path values (environment variables in File | Settings | Appearance & Behavior | Path Values) used when running within Intellij.  
 5. Build the project: `mvn package`
 6. Run DataGen to write data to the space.
-7. Go over CustomInAggrgator code
+7. Go over CustomINAggregator code
 8. Run TestInAggrgator
