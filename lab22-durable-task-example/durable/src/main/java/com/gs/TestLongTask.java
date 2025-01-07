@@ -25,6 +25,8 @@ public class TestLongTask {
         future.setListener(new MyTaskListner());
         Thread.sleep(WAIT_TIME);
         gs.unregisterDurableTask(taskId);
+        // This task should be unregisterd when we want to stop it or when its ended
+        // The only reason to register this task is to have the ability to stop it gracefuly when we want.
     }
 
     class MyTaskListner implements AsyncFutureListener {

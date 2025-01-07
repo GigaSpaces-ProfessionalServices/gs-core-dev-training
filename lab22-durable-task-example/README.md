@@ -27,11 +27,12 @@
 
    Please see the main [README.md](https://github.com/GigaSpaces-ProfessionalServices/gs-dev-training/blob/main/README.md) for setting path values (environment variables in File | Settings | Appearance & Behavior | Path Values) used when running within Intellij.  
 5. Build the project: `mvn package`
-6. Run TestEventTask - This will trigger embedded logic to run in each partition.
-7. Run DataGen to write data to the space.
-8. See console log - events are proccessed.
-7. Go to the REST API at `http://localhost:8090/v2`.
-8. Look at DurableTask section - get information about registered tasks.
-9. Run TestLongTask.
-10. Change wait time to longer period at TestLongTask and see the REST API while and after test ends.
+6. Run TestEventTask - This will trigger embedded logic to run in each partition
+7. Use Rest API at `http://localhost:8090/v2`.to see the list of durableTasks
+8. Restart both primary (can be done using gs-ui copied from previous version) ** ms14
+9. Validate EvenTask is still in register tasks list via Rest API.
+8. Run DataGen to write data to the space.
+9. See console log - events are processed
+10. Run TestLongTask
+11. Change wait time to longer period at TestLongTask and see rest api while and after test ends.
 
