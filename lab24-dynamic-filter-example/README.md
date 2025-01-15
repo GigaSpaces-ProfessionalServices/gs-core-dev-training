@@ -6,6 +6,7 @@
 ###### Goals
 1. Understand dynamic filter hint.
 2. Learn how to use dynamic filter hint.
+3. Understand colocated joins, join condition related to respective routing of the 2 tables.
   
 
 ###### Instructions
@@ -37,4 +38,4 @@ export GS_OPTIONS_EXT="-Dcom.gs.protectiveMode.queryWithoutIndex=false"
 See that run without the hint with no routing it takes much longer in this scenario and protective warning is logged.
 While running the same with the hint, no protective warning is logged as conditions are implicitly added. 
 If model is changed so routing of StudentCourses and Courses is courseId as in model2 
-and condition for studentId is explicitly added in StudentCourses 
+and condition for studentId is explicitly added in StudentCourses results are much better than the ones we get without hint in jdbcquery.

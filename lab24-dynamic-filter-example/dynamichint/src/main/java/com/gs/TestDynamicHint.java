@@ -9,13 +9,14 @@ import java.sql.*;
 import java.util.*;
 
 public class TestDynamicHint {
+    private final String EXPLAIN_PLAN_PREFIX = "EXPLAIN ANALYZE FOR ";
     public static void main(String[] args) throws Exception {
         GigaSpace gs = new GigaSpaceConfigurer(new SpaceProxyConfigurer("demo")).gigaSpace();
         TestDynamicHint test = new TestDynamicHint();
         test.runWithJdbcQuery(1,gs);
         test.runWithJdbcQuery2(1,gs);
 
-        // test.runWithJDynamicHintQuery(1, gs);
+        test.runWithJDynamicHintQuery(1, gs);
         test.runWith2Queries(gs,1);
     }
 
@@ -32,16 +33,11 @@ public class TestDynamicHint {
         queryBuffer.append("from (select * from\"com.gs.Student2\" where id=?) as s ");
         queryBuffer.append("join \"com.gs.StudentCourses2\"  as sc ON s.id=sc.studentId ");
         queryBuffer.append("join \"com.gs.Courses2\"  as c ON c.id=sc.courseId ");
-        Connection connection= getConnection(gs.getSpaceName());
 
-        PreparedStatement preparedStatement = connection.prepareStatement(queryBuffer.toString());
-        long start=System.currentTimeMillis();
-        preparedStatement.setInt(1,1);
-        ResultSet resultSet = preparedStatement.executeQuery();
 
-        long end=System.currentTimeMillis();
-        System.out.println("runWithJdbcQuery got :" +resultSet + " courses, took " + (end-start));
-        dumpResult(resultSet);
+        Object[] params = new Object[1]; params[0]=studentId;
+        long time = read(getConnection(gs.getSpaceName()), queryBuffer.toString(), params,false, true);
+        System.out.println("runWithJdbcQuery No Hint No Routing took: " + time);
 
     }
 
@@ -57,20 +53,15 @@ public class TestDynamicHint {
         queryBuffer.append("from (select * from\"com.gs.Student2\" where id=?) as s ");
         queryBuffer.append("join (select * from \"com.gs.StudentCourses2\" where studentId=?) as sc ON s.id=sc.studentId ");
         queryBuffer.append("join \"com.gs.Courses2\"  as c ON c.id=sc.courseId ");
-        Connection connection= getConnection(gs.getSpaceName());
 
-        PreparedStatement preparedStatement = connection.prepareStatement(queryBuffer.toString());
-        long start=System.currentTimeMillis();
-        preparedStatement.setInt(1,1);
-        preparedStatement.setInt(2,1);
-        ResultSet resultSet = preparedStatement.executeQuery();
+        Object[] params = new Object[2]; params[0]=studentId; params[1]=studentId;
 
-        long end=System.currentTimeMillis();
-        System.out.println("runWithJdbcQuery2 got :" +resultSet + " courses, took " + (end-start));
-        dumpResult(resultSet);
-
+        long time = read(getConnection(gs.getSpaceName()), queryBuffer.toString(), params,false, true);
+        System.out.println("runWithJdbcQuery2 - No Hint But Routing conditions took: " + time);
 
     }
+
+
 
     /*
     Run with dynamic hint - wait till m14
@@ -80,19 +71,14 @@ public class TestDynamicHint {
         studentCourses.setParameter(1, getStudentCoursesIds(1, gs));
 
         StringBuffer queryBuffer = new StringBuffer(6000);
-        queryBuffer.append("select /*+ DYNAMIC_FILTER(maxResponseSize='100') */  s.id, s.firstName, s.lastName,sc.sem, c.id, c.name ");
-        queryBuffer.append("from (select * from\"com.gs.Student2\" where id=?) as s ");
-        queryBuffer.append("join \"com.gs.StudentCourses2\"  as sc ON s.id=sc.studentId ");
-        queryBuffer.append("join \"com.gs.Courses2\"  as c ON c.id=sc.courseId ");
-        Connection connection= getConnection(gs.getSpaceName());
+        queryBuffer.append("select /*+ DYNAMIC_FILTER*/  s.id, s.firsName, s.lastName,sc.sem, c.id, c.name ");
+        queryBuffer.append("from (select * from\"com.gs.Student\" where id=?) as s ");
+        queryBuffer.append("join \"com.gs.StudentCourses\"  as sc ON s.id=sc.studentId ");
+        queryBuffer.append("join \"com.gs.Courses\"  as c ON c.id=sc.courseId ");
 
-        PreparedStatement preparedStatement = connection.prepareStatement(queryBuffer.toString());
-        long start=System.currentTimeMillis();
-        preparedStatement.setInt(1,1);
-        ResultSet resultSet = preparedStatement.executeQuery();
-
-        long end=System.currentTimeMillis();
-        System.out.println("runWithJDynamicHintQuery got :" +resultSet + " courses, took " + (end-start));
+        Object[] params = new Object[1]; params[0]=studentId;
+        long time = read(getConnection(gs.getSpaceName()), queryBuffer.toString(), params,false,true);
+        System.out.println("runWithJDynamicHintQuery - Dynamic hint ,No Routing condition took :"  + time);
 
     }
 
@@ -103,19 +89,66 @@ public class TestDynamicHint {
         studentCoursesSQLQuery.setProjections("courseId");
         StudentCourses[] results = gs.readMultiple(studentCoursesSQLQuery);
         Arrays.stream(results).forEach(sc-> ids.add(sc.getCourseId()));
-        System.out.println("getStudentCoursesIds: "+ ids.size());
         return ids;
     }
 
     private void runWith2Queries(GigaSpace gs, int studentId) throws Exception {
 
         SQLQuery<Courses> studentCourses = new SQLQuery<Courses>(Courses.class, "id in (?)");
-        studentCourses.setParameter(1, getStudentCoursesIds(studentId, gs));
         long start=System.currentTimeMillis();
+        studentCourses.setParameter(1, getStudentCoursesIds(studentId, gs));
+        // We actually need data regarding courses the student take and student details
         Courses[] results = gs.readMultiple(studentCourses);
+        Student template = new Student();
+        template.setId(studentId);
+        Student student = gs.read(template);
         long end=System.currentTimeMillis();
-        System.out.println("runWith2Queries got :" +results.length + " courses, took " + (end-start));
+        System.out.println("runWith2Queries GS API break query took: " + (end-start));
 
+    }
+
+    protected long read(Connection connection, String query, Object[] parameters, boolean shouldPrintResults, boolean shouldPrintExplain){
+
+        if (shouldPrintExplain) {
+            System.out.println("");
+            System.out.println("About to run explain for Query : " + query);
+            try {
+                String explan = EXPLAIN_PLAN_PREFIX + " " + query;
+                PreparedStatement preparedStatement = connection.prepareStatement(explan);
+                for (int k = 0; k < parameters.length; k++)
+                    preparedStatement.setObject(k + 1, parameters[k]);
+
+                dumpResult(preparedStatement.executeQuery());
+                System.out.println("");
+                preparedStatement.close();
+            } catch (Throwable e) {
+                System.out.println("Fail to run explain plan:" + e);
+                e.printStackTrace();
+            }
+        }
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            for (int k=0; k< parameters.length; k++)
+                preparedStatement.setObject(k+1, parameters[k]);
+            long start = System.currentTimeMillis();
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            long end = System.currentTimeMillis();
+            if (shouldPrintResults)  {
+                System.out.println("Results for query: " + query);
+                dumpResult(resultSet);
+            }
+
+            preparedStatement.close();
+            return (end-start);
+        }
+        catch (Throwable t){
+
+            System.out.println("Fail to run query:" + t);
+            t.printStackTrace();
+        }
+        return -1;
     }
 
 
