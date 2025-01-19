@@ -16,7 +16,8 @@ public class TestInAggrgator {
         TestInAggrgator test = new TestInAggrgator();
         test.runAggrgator(gs);
         test.runWithoutAggrgator(gs);
-        test.runWithJdbcQuery(1,gs);
+        for (int k=0; k<2; k++)
+            test.runWithJdbcQuery(1,gs,k);
     }
 
     private void runWithoutAggrgator(GigaSpace gs) throws Exception {
@@ -26,7 +27,7 @@ public class TestInAggrgator {
         long start=System.currentTimeMillis();
         Courses[] results = gs.readMultiple(studentCourses);
         long end=System.currentTimeMillis();
-        System.out.println("runWithoutAggrgator got :" +results.length + " courses, took " + (end-start));
+        System.out.println("Run using query condition got :" +results.length + " courses, took " + (end-start));
 
     }
 
@@ -41,7 +42,7 @@ public class TestInAggrgator {
 
         ArrayList<Object> results = (ArrayList<Object>) result.get(0);
 
-        System.out.println("runAggrgator got :" +results.size() + " courses, took " + (end-start));
+        System.out.println("Run using custom IN Aggrgator got :" +results.size() + " courses, took " + (end-start));
 
     }
 
@@ -52,19 +53,25 @@ public class TestInAggrgator {
         studentCoursesSQLQuery.setProjections("courseId");
         StudentCourses[] results = gs.readMultiple(studentCoursesSQLQuery);
         Arrays.stream(results).forEach(sc-> ids.add(sc.getCourseId()));
-        System.out.println("getStudentCoursesIds: "+ ids.size());
+       // System.out.println("getStudentCoursesIds: "+ ids.size());
         return ids;
     }
 
     /*
     temp - will be removed from training
      */
-    protected void runWithJdbcQuery(int studentId, GigaSpace gs) throws Exception{
+    protected void runWithJdbcQuery(int studentId, GigaSpace gs, int k) throws Exception{
         SQLQuery<Courses> studentCourses = new SQLQuery<Courses>(Courses.class, "id in (?)");
         studentCourses.setParameter(1, getStudentCoursesIds(1, gs));
 
         StringBuffer queryBuffer = new StringBuffer(6000);
         queryBuffer.append("select * from \"com.gs.Courses\" where id in (");
+        Collection<Object> ids = getStudentCoursesIds(1, gs);
+        /*if (k>0) {
+            ids.add(99778811));
+            ids.add(888888888);
+        }*/
+        System.out.println("JDBC IN with n items :" + ids.size());
         getStudentCoursesIds(1,gs).stream().forEach(id -> queryBuffer.append(id).append(","));
         queryBuffer.deleteCharAt(queryBuffer.length()-1);
         queryBuffer.append(")");
@@ -75,7 +82,7 @@ public class TestInAggrgator {
         ResultSet resultSet = preparedStatement.executeQuery();
 
         long end=System.currentTimeMillis();
-        System.out.println("runWithJdbcQuery got :" +resultSet + " courses, took " + (end-start));
+        System.out.println("runWithJdbcQuery took " + (end-start));
 
     }
 

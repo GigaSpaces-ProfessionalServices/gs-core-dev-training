@@ -3,10 +3,7 @@ import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import com.gigaspaces.CommonSystemProperties;
@@ -31,6 +28,7 @@ import com.j_spaces.core.cache.IEntryCacheInfo;
 import com.j_spaces.core.cache.TypeData;
 import com.j_spaces.core.cache.TypeDataIndex;
 import com.j_spaces.kernel.IStoredList;
+import com.j_spaces.kernel.IStoredListIterator;
 import org.openspaces.core.GigaSpace;
 import org.openspaces.core.aggregators.GigaSpaceAggregation;
 
@@ -129,12 +127,19 @@ public class CustomINAggregator extends AbstractPathAggregator<ArrayList<Object>
 
 
     protected void addIndexEntries(TypeDataIndex index, ITypeDesc typeDesc, Object value){
-      //  System.out.println("addIndexEntries value="+value);
-        IStoredList<IEntryCacheInfo> list = (IStoredList<IEntryCacheInfo>) index.getIndexEntries(value);
-        if (list != null){
-            IEntryCacheInfo info = list.getObjectFromHead();
-            IEntryData entryData = info.getEntryHolder(index.getCacheManager()).getEntryData();
-            result.add(createEntryPacket(info,entryData));
+
+        IStoredListIterator<IEntryCacheInfo> slh = null;
+        try {
+            IStoredList<IEntryCacheInfo> sl = index.getIndexEntries(value);
+            if (sl == null) return;
+            for (slh = sl.establishListScan(false); slh != null; slh = sl.next(slh)) {
+                IEntryCacheInfo subject = slh.getSubject();
+                if (subject != null)
+                    result.add(createEntryPacket(subject,subject.getEntryHolder(index.getCacheManager()).getEntryData()));
+            }
+        } finally {
+            if (slh != null)
+                slh.release();
         }
 
     }
@@ -158,6 +163,15 @@ public class CustomINAggregator extends AbstractPathAggregator<ArrayList<Object>
 
 
         return finalResults;
+    }
+
+
+   protected IStoredListIterator<IEntryCacheInfo> getIndexValueIterator(TypeDataIndex index, Object value) {
+        if (index.getIndexEntries(value)!= null)
+            return index.getIndexEntries(value).establishListScan(true);
+        return null;
+
+
     }
 
 
