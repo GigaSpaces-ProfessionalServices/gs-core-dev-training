@@ -30,3 +30,5 @@
 6. Run DataGen to write data to the space.
 7. Go over CustomINAggregator code
 8. Run TestInAggrgator
+
+#### Note: There is no need to define custom aggrgation for IN as shown in this example by default the IN condition use index

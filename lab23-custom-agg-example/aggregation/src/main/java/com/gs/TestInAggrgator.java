@@ -16,8 +16,6 @@ public class TestInAggrgator {
         TestInAggrgator test = new TestInAggrgator();
         test.runAggrgator(gs);
         test.runWithoutAggrgator(gs);
-        for (int k=0; k<2; k++)
-            test.runWithJdbcQuery(1,gs,k);
     }
 
     private void runWithoutAggrgator(GigaSpace gs) throws Exception {
@@ -51,47 +49,14 @@ public class TestInAggrgator {
         SQLQuery<StudentCourses> studentCoursesSQLQuery = new SQLQuery<>(StudentCourses.class, "studentId=?");
         studentCoursesSQLQuery.setParameter(1, studentId);
         studentCoursesSQLQuery.setProjections("courseId");
+
         StudentCourses[] results = gs.readMultiple(studentCoursesSQLQuery);
         Arrays.stream(results).forEach(sc-> ids.add(sc.getCourseId()));
-       // System.out.println("getStudentCoursesIds: "+ ids.size());
+        System.out.println("getStudentCoursesIds: "+ ids.size());
         return ids;
     }
 
-    /*
-    temp - will be removed from training
-     */
-    protected void runWithJdbcQuery(int studentId, GigaSpace gs, int k) throws Exception{
-        SQLQuery<Courses> studentCourses = new SQLQuery<Courses>(Courses.class, "id in (?)");
-        studentCourses.setParameter(1, getStudentCoursesIds(1, gs));
 
-        StringBuffer queryBuffer = new StringBuffer(6000);
-        queryBuffer.append("select * from \"com.gs.Courses\" where id in (");
-        Collection<Object> ids = getStudentCoursesIds(1, gs);
-        /*if (k>0) {
-            ids.add(99778811));
-            ids.add(888888888);
-        }*/
-        System.out.println("JDBC IN with n items :" + ids.size());
-        getStudentCoursesIds(1,gs).stream().forEach(id -> queryBuffer.append(id).append(","));
-        queryBuffer.deleteCharAt(queryBuffer.length()-1);
-        queryBuffer.append(")");
-        Connection connection= getConnection(gs.getSpaceName());
-
-        PreparedStatement preparedStatement = connection.prepareStatement(queryBuffer.toString());
-        long start=System.currentTimeMillis();
-        ResultSet resultSet = preparedStatement.executeQuery();
-
-        long end=System.currentTimeMillis();
-        System.out.println("runWithJdbcQuery took " + (end-start));
-
-    }
-
-    protected static Connection getConnection(String spaceName) throws Exception {
-        Properties properties = new Properties();
-        properties.put("com.gs.embeddedQP.enabled", "true");
-        return DriverManager.getConnection("jdbc:gigaspaces:v3://localhost:4174/" + spaceName, properties);
-
-    }
 
 
 

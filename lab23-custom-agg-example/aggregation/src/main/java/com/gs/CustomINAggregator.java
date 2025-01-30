@@ -32,7 +32,7 @@ import com.j_spaces.kernel.IStoredListIterator;
 import org.openspaces.core.GigaSpace;
 import org.openspaces.core.aggregators.GigaSpaceAggregation;
 
-@SupportCodeChange(id="1")
+@SupportCodeChange(id="2")
 public class CustomINAggregator extends AbstractPathAggregator<ArrayList<Object>> implements Externalizable {
 
    /*injection of local space instance if needed
@@ -63,6 +63,8 @@ public class CustomINAggregator extends AbstractPathAggregator<ArrayList<Object>
         setPath(propertyName);
         this.collection = collection;
     }
+
+
 
 
     /*
@@ -106,20 +108,32 @@ public class CustomINAggregator extends AbstractPathAggregator<ArrayList<Object>
         return Boolean.parseBoolean(GsEnv.property(CommonSystemProperties.AGGREGATION_IGNORE_PROCESSED_UIDS).get("true"));
     }
 
-    /*
-    The method skipFullScanSupported checks if indexes can be used to optimize the aggrgation and skip aggrgate per each object
+
+     /*
+    The method skipFullScanSupported checks if indexes can be used or query can be pushed to tier to optimize the aggrgation and skip aggrgate per each object
      */
+
     @Override
     public boolean skipFullScanSupported(Map<String, SpaceIndex> indexes, boolean isMemoryScan) {
+        return !isMemoryScan || isIndexUsed(indexes, isMemoryScan);
+    }
+
+    /*
+    Check If aggrgation index optimization can be used
+     */
+    @Override
+    public boolean isIndexUsed(Map<String, SpaceIndex> indexes, boolean isMemoryScan) {
         SpaceIndex index = indexes.get(getPath());
         return (getFunctionCallColumn() == null && index != null  && (index.getIndexType() == SpaceIndexType.EQUAL || index.getIndexType() == SpaceIndexType.EQUAL_AND_ORDERED));
+
     }
+
 
     @Override
     public void handleIntermediateResultOfMemoryStorage(TypeDataIndex index, TypeData entryType) {
 
         ITypeDesc typeDesc = entryType.getCacheManager().getTypeManager().getTypeDesc(entryType.getClassName());
-        System.out.println("index is used");
+        System.out.println("====index optimization is used");
         collection.stream().forEach(value -> addIndexEntries(index, typeDesc, value));
 
     }
