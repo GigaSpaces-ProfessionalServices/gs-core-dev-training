@@ -16,6 +16,7 @@ public class DataGen {
     final static int N_STUDENTS=100;
     final static int N_CURSES= 100000;
     final static int N_CURSE_PER_STUDENT = 50;
+    final static int BATCH_SIZE = 5000;
 
     public static void main(String[] args) throws SQLException {
         GigaSpace gs = new GigaSpaceConfigurer(new SpaceProxyConfigurer("demo")).gigaSpace();
@@ -31,10 +32,15 @@ public class DataGen {
         departments.add(new Department(3, "science"));
         departments.add(new Department(4, "art"));
         departments.forEach(d->gs.write(d));
-        ArrayList<Courses> courses = new ArrayList<>(N_CURSES);
-        for (int k =1; k <= N_CURSES; k++)
-            courses.add(new Courses(k,"Course_"+ k,k+1500.0,1 + k % 4));
-        courses.forEach(p-> gs.write(p));
+        ArrayList<Courses> courses = new ArrayList<>(BATCH_SIZE);
+        for (int k =1; k <= N_CURSES; k++) {
+            courses.add(new Courses(k, "Course_" + k, k + 1500.0, 1 + k % 4));
+            if (k % BATCH_SIZE == 0){
+              gs.writeMultiple(courses.toArray());
+              courses = new ArrayList<>(BATCH_SIZE);
+            }
+        }
+        if (courses.size() > 0)  gs.writeMultiple(courses.toArray());
         ArrayList<Student> students = new ArrayList<>(N_STUDENTS);
         for (int k =1; k <= N_STUDENTS; k++)
             students.add(new  Student("Cohen_"+k,"Avi_"+k, Date.valueOf("1980-02-01"),k));
@@ -45,7 +51,7 @@ public class DataGen {
                 studentCourses.add(new StudentCourses(k,c, 202501 + k%2));
             }
         }
-        studentCourses.forEach(p->gs.write(p))  ;
+        gs.writeMultiple(studentCourses.toArray());
     }
 
 

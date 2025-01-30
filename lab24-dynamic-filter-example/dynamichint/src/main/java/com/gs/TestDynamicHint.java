@@ -15,7 +15,6 @@ public class TestDynamicHint {
         TestDynamicHint test = new TestDynamicHint();
         test.runWithJdbcQuery(1,gs);
         test.runWithJdbcQuery2(1,gs);
-
         test.runWithJDynamicHintQuery(1, gs);
         test.runWith2Queries(gs,1);
     }
@@ -62,10 +61,6 @@ public class TestDynamicHint {
     }
 
 
-
-    /*
-    Run with dynamic hint - wait till m14
-     */
     protected void runWithJDynamicHintQuery(int studentId, GigaSpace gs) throws Exception{
         SQLQuery<Courses> studentCourses = new SQLQuery<Courses>(Courses.class, "id in (?)");
         studentCourses.setParameter(1, getStudentCoursesIds(1, gs));
