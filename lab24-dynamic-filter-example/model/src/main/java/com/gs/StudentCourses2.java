@@ -23,6 +23,13 @@ public class StudentCourses2 {
         this.sem = sem;
     }
 
+    public StudentCourses2( Integer studentId, Integer courseId) {
+        this.studentId = studentId;
+        this.courseId = courseId;
+        this.sem = 1;
+    }
+
+
 
     public long getSem() {
         return sem;

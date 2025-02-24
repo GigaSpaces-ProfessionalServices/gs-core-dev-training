@@ -24,6 +24,13 @@ public class StudentCourses {
         this.sem = sem;
     }
 
+    public StudentCourses( Integer studentId, Integer courseId) {
+        this.studentId = studentId;
+        this.courseId = courseId;
+        this.sem = 1;
+    }
+
+
 
     public long getSem() {
         return sem;

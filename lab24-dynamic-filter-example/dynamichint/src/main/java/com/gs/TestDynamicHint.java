@@ -12,11 +12,15 @@ public class TestDynamicHint {
     private final String EXPLAIN_PLAN_PREFIX = "EXPLAIN ANALYZE FOR ";
     public static void main(String[] args) throws Exception {
         GigaSpace gs = new GigaSpaceConfigurer(new SpaceProxyConfigurer("demo")).gigaSpace();
+
         TestDynamicHint test = new TestDynamicHint();
-        test.runWithJdbcQuery(1,gs);
-        test.runWithJdbcQuery2(1,gs);
-        test.runWithJDynamicHintQuery(1, gs);
-        test.runWith2Queries(gs,1);
+        for (int k=0; k<2; k++) {
+            System.out.println("========================================= Run number :" + k);
+            test.runWithJdbcQuery(1, gs);
+            test.runWithJdbcQuery2(1, gs);
+            test.runWithJDynamicHintQuery(1, gs);
+            test.runWith2Queries(gs, 1);
+        }
     }
 
 

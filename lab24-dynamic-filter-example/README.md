@@ -39,3 +39,4 @@ See that run without the hint with no routing it takes much longer in this scena
 While running the same with the hint, no protective warning is logged as conditions are implicitly added. 
 If model is changed so routing of StudentCourses and Courses is courseId as in model2 
 and condition for studentId is explicitly added in StudentCourses results are much better than the ones we get without hint in jdbcquery.
+Please also note that since plan is cached second execution will be better than first one, an usualy runing services same partterns of queries repeat themselves
