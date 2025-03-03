@@ -3,6 +3,8 @@ import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -32,12 +34,12 @@ import com.j_spaces.kernel.IStoredListIterator;
 import org.openspaces.core.GigaSpace;
 import org.openspaces.core.aggregators.GigaSpaceAggregation;
 
-@SupportCodeChange(id="2")
+@SupportCodeChange(id="1")
 public class CustomINAggregator extends AbstractPathAggregator<ArrayList<Object>> implements Externalizable {
 
-   /*injection of local space instance if needed
+   //injection of local space instance if needed (not used in this example)
     @GigaSpaceAggregation
-    protected transient GigaSpace gs;*/
+    protected transient GigaSpace gs;
 
 
 
@@ -141,8 +143,22 @@ public class CustomINAggregator extends AbstractPathAggregator<ArrayList<Object>
 
     }
 
+    @Override
+    public void handleIntermediateResultOfDbStorage(ResultSet resultSet, ITypeDesc typeDesc) throws SQLException {
+        //ToDo in case of tieredStorage space handel resultSet retived from SQLLite;
+    }
+
+    @Override
+    public String getSQLQuery(String typeName) {
+       //ToDo in case of TieredStorage space return the query that should be executed on sqlite
+        return null;
+    }
 
 
+
+    /*
+    Retrive values from index
+     */
     protected void addIndexEntries(TypeDataIndex index, ITypeDesc typeDesc, Object value){
 
         IStoredListIterator<IEntryCacheInfo> slh = null;

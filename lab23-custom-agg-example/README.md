@@ -5,8 +5,29 @@
 ## custom aggregation example
 ###### Goals
 1. Understand custom aggregation.
-2. Learn how to use index data in custom aggregators
-  
+2. Learn how to use index data in custom aggregator
+
+###### What are aggregations
+count, sum, avg, min, max, orderby, groupby etc are example of built in aggrgetaion
+Aggregation go over data of specific table with certain condition and gather information 
+When possiable index and counters will be used to optimize performance
+As Gigaspace is disterbuted in memory data grid, aggregation will be preformed in the server side per each partition
+and reduced in the client, several aggrgation can be sent together in aggregationSet
+
+###### GigaSpace API For aggregation
+ <T> AggregationResult aggregate(ISpaceQuery<T> query, AggregationSet aggregationSet, ReadModifiers readModifiers)
+ 
+ aggregations will be used implicetly in some SQLQuery as:
+ used implicitly via SQLQuery: 
+ SqlQuery<Person> query = new SqlQuery<Person>("Age >= ? ORDER BY FirstName = ?")
+ 
+ Or when using JDBC V3 query: 
+ Select sum(amount) as total from table1 
+ 
+####### What are custom aggregations
+When needed you can define your own custom aggregation by extending SpaceEntriesAggregator
+In the example CustomINAggregator we extends AbstractPathAggregator which extends SpaceEntriesAggregator adding common functionality to one field based aggregation
+ 
 
 ###### Instructions
 
