@@ -119,7 +119,7 @@ public class CustomINAggregator extends AbstractPathAggregator<ArrayList<Object>
     }
 
     /*
-    Check If aggrgation index optimization can be used
+    Check If aggregation index optimization can be used
      */
     @Override
     public boolean isIndexUsed(Map<String, SpaceIndex> indexes, boolean isMemoryScan) {
@@ -130,6 +130,9 @@ public class CustomINAggregator extends AbstractPathAggregator<ArrayList<Object>
 
 
     @Override
+    /*
+    if one by one aggregation is skipped how should we get partition results for memory space
+     */
     public void handleIntermediateResultOfMemoryStorage(TypeDataIndex index, TypeData entryType) {
 
         ITypeDesc typeDesc = entryType.getCacheManager().getTypeManager().getTypeDesc(entryType.getClassName());
@@ -166,6 +169,9 @@ public class CustomINAggregator extends AbstractPathAggregator<ArrayList<Object>
 
 
     @Override
+    /*
+    return final results after all partitions results arrived
+     */
     public ArrayList<Object> getFinalResult() {
         if (result == null) {
             return new ArrayList<Object>();
