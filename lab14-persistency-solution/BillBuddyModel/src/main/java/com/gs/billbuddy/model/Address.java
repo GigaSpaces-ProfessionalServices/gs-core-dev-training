@@ -2,7 +2,7 @@ package com.gs.billbuddy.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Embeddable;
+import jakarta.persistence.Embeddable;
 
 
 

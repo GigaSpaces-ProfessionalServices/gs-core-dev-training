@@ -11,7 +11,7 @@
 
 ## Prerequisites
 
-1. `JDK` - Oracle or OpenJDK, preferably version 11.
+1. `JDK` - Oracle or OpenJDK, preferably version 17.
 2. [Maven](https://maven.apache.org/install.html)
 3. `curl` command line client url
 4. Java IDE such as [Intellij Community Edition](https://www.jetbrains.com/idea/download/)
@@ -35,9 +35,9 @@ You can verify with the following:
 ```
 $ helm list
 NAME     	NAMESPACE	REVISION	UPDATED                                	STATUS  	CHART              	APP VERSION
-manager  	default  	1       	2024-03-26 13:58:14.976120909 -0400 EDT	deployed	xap-manager-16.4.0 	           
-operator 	default  	1       	2024-03-26 13:58:23.440944168 -0400 EDT	deployed	xap-operator-16.4.0	           
-processor	default  	1       	2024-03-26 13:58:32.081939187 -0400 EDT	deployed	xap-pu-16.4.0      	
+manager  	default  	1       	2024-03-26 13:58:14.976120909 -0400 EDT	deployed	xap-manager-17.1.0 	           
+operator 	default  	1       	2024-03-26 13:58:23.440944168 -0400 EDT	deployed	xap-operator-17.1.0	           
+processor	default  	1       	2024-03-26 13:58:32.081939187 -0400 EDT	deployed	xap-pu-17.1.0      	
 ```
 ```
 $ kubectl get all
@@ -120,10 +120,10 @@ If running on minikube, you can get access to the service's NodePort using `mini
 1. Copy the xap-manager url and paste in your browser's url bar.  
 Click on 'Monitor my services' | click on the 'processor' service | click on the 'Space:processor-space' button (top right corner).  
 You should see a list of types. See screenshot below.  
-![Screenshot of types](https://github.com/GigaSpaces-ProfessionalServices/gs-dev-training-stage/blob/main/lab20-billing_app-example/Pictures/ops_ui-types.png)
+![Screenshot of types](https://github.com/GigaSpaces-ProfessionalServices/gs-core-dev-training/blob/main/lab20-billing_app-example/Pictures/ops_ui-types.png)
 
 2. You can also run queries from the ops-ui. Choose the 'SQL Editor' pane. We have run `SELECT * from "com.mycompany.app.model.User" LIMIT 10`
-![Screenshot of query](https://github.com/GigaSpaces-ProfessionalServices/gs-dev-training-stage/blob/main/lab20-billing_app-example/Pictures/ops_ui-query.png)
+![Screenshot of query](https://github.com/GigaSpaces-ProfessionalServices/gs-core-dev-training/blob/main/lab20-billing_app-example/Pictures/ops_ui-query.png)
 3. You can check the rest application by running curl commands against it.  
 
 Visit this [page](example_curl_commands.md) for a list of curl commands that can be run.

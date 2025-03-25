@@ -9,8 +9,8 @@ import com.gigaspaces.metadata.index.SpaceIndexType;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 
 /** 

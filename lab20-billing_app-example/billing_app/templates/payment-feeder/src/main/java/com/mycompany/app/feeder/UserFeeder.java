@@ -22,8 +22,8 @@ import com.mycompany.app.model.CountryNames;
 import com.mycompany.app.model.User;
 import org.openspaces.core.GigaSpace;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;

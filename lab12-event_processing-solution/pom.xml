@@ -19,13 +19,13 @@
         </pluginRepository>
     </pluginRepositories>
     <properties>
-        <gigaspaces.version>16.4.0</gigaspaces.version>
+        <gigaspaces.version>17.1.0</gigaspaces.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-        <spring.version>5.3.29</spring.version>
-        <slf4j.version>1.7.26</slf4j.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <spring.version>6.2.1</spring.version>
+        <slf4j.version>2.0.11</slf4j.version>
     </properties>
     <modules>
        <module>BillBuddyModel</module>
@@ -44,7 +44,7 @@
             <groupId>org.gigaspaces</groupId>
             <artifactId>xap-openspaces</artifactId>
             <version>${gigaspaces.version}</version>
-            <scope>compile</scope>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>javax.annotation</groupId>

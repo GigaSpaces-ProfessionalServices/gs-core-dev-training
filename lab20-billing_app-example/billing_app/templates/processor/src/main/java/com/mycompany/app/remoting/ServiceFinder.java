@@ -16,7 +16,7 @@
 
 package com.mycompany.app.remoting;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 import com.mycompany.app.model.Merchant;
 import com.mycompany.app.model.Payment;

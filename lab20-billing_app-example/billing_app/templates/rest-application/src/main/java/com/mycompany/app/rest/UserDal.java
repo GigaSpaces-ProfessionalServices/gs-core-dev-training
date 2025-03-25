@@ -18,8 +18,8 @@ package com.mycompany.app.rest;
 
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.Resource;
 
 import org.openspaces.core.GigaSpace;
 import org.springframework.beans.factory.annotation.Qualifier;
