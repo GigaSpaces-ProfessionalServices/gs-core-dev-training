@@ -1,4 +1,4 @@
-# gs-dev-training - lab11-space_based_remoting-exercise
+# gs-core-dev-training - lab11-space_based_remoting-exercise
 
 ## 	Space Based Remoting
 
@@ -24,7 +24,7 @@ $GS_HOME/bin/gs-ui.sh
 **1.1** Open gs-core-dev-training/lab11-space_based_remoting-exercise project with Intellij (open pom.xml)<br>
 **1.2** Run mvn package
 
-    ~/gs-dev-training/lab11-space_based_remoting-exercise$ mvn package
+    ~/gs-core-dev-training/lab11-space_based_remoting-exercise$ mvn package
     
        [INFO] ------------------------------------------------------------------------
        [INFO] Reactor Summary:

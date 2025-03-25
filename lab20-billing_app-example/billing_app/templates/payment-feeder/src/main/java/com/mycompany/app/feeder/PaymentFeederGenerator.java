@@ -20,8 +20,8 @@ package com.mycompany.app.feeder;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.Resource;
 
 /** 
  * Payment Feeder class read user and merchant randomly  

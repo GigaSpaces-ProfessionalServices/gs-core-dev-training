@@ -24,8 +24,8 @@ import com.mycompany.app.model.Merchant;
 import org.openspaces.core.GigaSpace;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.Resource;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;

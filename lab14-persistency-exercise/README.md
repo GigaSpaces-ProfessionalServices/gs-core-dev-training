@@ -1,4 +1,4 @@
-# gs-dev-training - lab14-persistency-exercise
+# gs-core-dev-training - lab14-persistency-exercise
 
 ## Persistency – Mirror Service
 
@@ -16,10 +16,10 @@ Use the slides from the lesson as a reference.
 
 Make sure you restart the service grid and gs-ui (*or at least undeploy all Processing Units using gs-ui*)
 
-1. Open gs-dev-training/lab14-persistency-exercise project with Intellij (*open the pom.xml file*)
+1. Open gs-core-dev-training/lab14-persistency-exercise project with Intellij (*open the pom.xml file*)
 2. Run `mvn package`
 ```
-    ~/gs-dev-training/lab14-persistency-exercise$ mvn package  
+    ~/gs-core-dev-training/lab14-persistency-exercise$ mvn package  
   
     [INFO] ------------------------------------------------------------------------  
     [INFO] Reactor Summary:  
@@ -165,9 +165,9 @@ We will using MySQL db instance.
     `./gs.sh host run-agent --auto --gsc=5`
 2. Run gs-ui
 3. Deploy BillBuddy_space to the service grid.  
-    `./gs.sh pu deploy BillBuddy-Space ~/gs-dev-training/lab14-persistency-exercise/BillBuddy_Space/target/BillBuddy_Space.jar`
+    `./gs.sh pu deploy BillBuddy-Space ~/gs-core-dev-training/lab14-persistency-exercise/BillBuddy_Space/target/BillBuddy_Space.jar`
 4. Deploy BillBuddyPersistency to the service grid (*Remember to include BillBuddy model Project. See below*)  
-    `./gs.sh pu deploy BillBuddyPersistency ~/gs-dev-training/lab14-persistency-exercise/BillBuddyPersistency/target/BillBuddyPersistency.jar`
+    `./gs.sh pu deploy BillBuddyPersistency ~/gs-core-dev-training/lab14-persistency-exercise/BillBuddyPersistency/target/BillBuddyPersistency.jar`
 5. Validate Mirror service deployed by using gs-ui
 
 ![snapshot](./Pictures/Picture2.png)

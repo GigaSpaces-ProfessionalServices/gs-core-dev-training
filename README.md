@@ -2,7 +2,7 @@
 
 Before you start please verify that you have on your machine the following:
 
-1. `JDK` - Oracle JDK or OpenJDK, preferably version 11.
+1. `JDK` - Oracle JDK or OpenJDK, preferably version 17.
 1. `Maven`
 1. `Intellij` - this is the preferred Java IDE, although other IDEs will work.
 

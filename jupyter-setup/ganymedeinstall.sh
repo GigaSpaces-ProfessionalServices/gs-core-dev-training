@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
+JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64"
 
 # Example basic install command that we will expand upon
 # java -jar ganymede-2.1.2.20230910.jar -i

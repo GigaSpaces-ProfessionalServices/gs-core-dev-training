@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+//import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
 @RestController
@@ -40,7 +40,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableTransactionManagement
 @PropertySource("classpath:application.properties")
-@EnableSwagger2
+//@EnableSwagger2
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
 public class Main {
 
