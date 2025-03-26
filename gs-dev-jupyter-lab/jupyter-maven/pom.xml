@@ -19,11 +19,10 @@
     </modules>
 
     <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <gigaspaces.version>16.4.0</gigaspaces.version>
-        <spring.version>5.3.29</spring.version>
+        <gigaspaces.version>17.1.0</gigaspaces.version>
         <maven.test.skip>true</maven.test.skip>
     </properties>
 
