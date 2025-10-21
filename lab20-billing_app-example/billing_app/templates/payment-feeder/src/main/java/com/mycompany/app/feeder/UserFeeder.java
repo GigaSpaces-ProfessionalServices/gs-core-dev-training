@@ -44,6 +44,10 @@ public class UserFeeder {
 	@Resource
 	private GigaSpace gigaSpace;
 
+	public void setGigaSpace(GigaSpace gigaSpace) {
+		this.gigaSpace = gigaSpace;
+	}
+
 	private static final List<String> users = new ArrayList<String>();
 	static {
 		users.add("James Johnson");

@@ -55,22 +55,82 @@ public class Main {
     private String locators;
 
     @Bean
-    BillBuddyDal billBuddyDal() {
-        return new BillBuddyDal();
+    BillBuddyDal billBuddyDal() throws Exception {
+        BillBuddyDal dal = new BillBuddyDal();
+        // Manually inject gigaSpace field since @Resource is not processed on factory method beans
+        try {
+            java.lang.reflect.Field gigaSpaceField = BillBuddyDal.class.getDeclaredField("gigaSpace");
+            gigaSpaceField.setAccessible(true);
+            gigaSpaceField.set(dal, gigaSpace());
+
+            // Manually call init since @PostConstruct is not invoked
+            java.lang.reflect.Method init = BillBuddyDal.class.getDeclaredMethod("init");
+            init.setAccessible(true);
+            init.invoke(dal);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to initialize BillBuddyDal", e);
+        }
+        return dal;
     }
 
     @Bean
-    MerchantDal merchantDal() {
-        return new MerchantDal();
+    MerchantDal merchantDal() throws Exception {
+        MerchantDal dal = new MerchantDal();
+        // Manually inject gigaSpace field since @Resource is not processed on factory method beans
+        try {
+            java.lang.reflect.Field gigaSpaceField = MerchantDal.class.getDeclaredField("gigaSpace");
+            gigaSpaceField.setAccessible(true);
+            gigaSpaceField.set(dal, gigaSpace());
+
+            // Manually call init since @PostConstruct is not invoked
+            java.lang.reflect.Method init = MerchantDal.class.getDeclaredMethod("init");
+            init.setAccessible(true);
+            init.invoke(dal);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to initialize MerchantDal", e);
+        }
+        return dal;
     }
 
     @Bean
-    UserDal userDal() {
-        return new UserDal();
+    UserDal userDal() throws Exception {
+        UserDal dal = new UserDal();
+        // Manually inject gigaSpace field since @Resource is not processed on factory method beans
+        try {
+            java.lang.reflect.Field gigaSpaceField = UserDal.class.getDeclaredField("gigaSpace");
+            gigaSpaceField.setAccessible(true);
+            gigaSpaceField.set(dal, gigaSpace());
+
+            // Manually call init since @PostConstruct is not invoked
+            java.lang.reflect.Method init = UserDal.class.getDeclaredMethod("init");
+            init.setAccessible(true);
+            init.invoke(dal);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to initialize UserDal", e);
+        }
+        return dal;
     }
 
     @Bean
-    DataController dataController() { return new DataController(); }
+    DataController dataController() throws Exception {
+        DataController controller = new DataController();
+        // Manually inject fields since @Resource is not processed on factory method beans
+        try {
+            java.lang.reflect.Field billBuddyDalField = DataController.class.getDeclaredField("billBuddyDal");
+            billBuddyDalField.setAccessible(true);
+            billBuddyDalField.set(controller, billBuddyDal());
+
+            java.lang.reflect.Field spaceField = DataController.class.getDeclaredField("space");
+            spaceField.setAccessible(true);
+            spaceField.set(controller, gigaSpace());
+
+            // Manually call initialize since @PostConstruct is not invoked
+            controller.initialize();
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to initialize DataController", e);
+        }
+        return controller;
+    }
 
     // for Space proxy
     @Bean

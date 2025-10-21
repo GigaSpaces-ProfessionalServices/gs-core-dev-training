@@ -44,6 +44,10 @@ public class PaymentFeeder  {
     @Resource
     private GigaSpace gigaSpace;
 
+    public void setGigaSpace(GigaSpace gigaSpace) {
+        this.gigaSpace = gigaSpace;
+    }
+
     private final Log log = LogFactory.getLog(PaymentFeederGenerator.class);
     private int userCount = 0;
     private int merchantCount = 0;

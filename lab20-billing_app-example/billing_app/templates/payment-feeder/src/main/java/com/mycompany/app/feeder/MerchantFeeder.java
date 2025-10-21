@@ -48,6 +48,10 @@ public class MerchantFeeder {
     @Resource
     private GigaSpace gigaSpace;
 
+    public void setGigaSpace(GigaSpace gigaSpace) {
+        this.gigaSpace = gigaSpace;
+    }
+
     private static final List<String> merchants = new ArrayList<String>();
 
     static {

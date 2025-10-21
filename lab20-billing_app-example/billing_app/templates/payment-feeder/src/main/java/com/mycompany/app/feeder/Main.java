@@ -71,22 +71,42 @@ public class Main {
 
     // for account creation
     @Bean("userFeeder")
-    @DependsOn("gigaSpace")
-    public UserFeeder userFeeder() { return new UserFeeder(); }
+    public UserFeeder userFeeder(GigaSpace gigaSpace) {
+        UserFeeder feeder = new UserFeeder();
+        feeder.setGigaSpace(gigaSpace);
+        // Manually call the initialization method since @PostConstruct is not being invoked
+        feeder.postConstruct();
+        return feeder;
+    }
 
     @Bean("merchantFeeder")
-    @DependsOn("gigaSpace")
-    public MerchantFeeder merchantFeeder() { return new MerchantFeeder(); }
+    public MerchantFeeder merchantFeeder(GigaSpace gigaSpace) throws Exception {
+        MerchantFeeder feeder = new MerchantFeeder();
+        feeder.setGigaSpace(gigaSpace);
+        // Manually call the initialization method since @PostConstruct is not being invoked
+        feeder.postConstruct();
+        return feeder;
+    }
 
 
     // for payment feeder
     @Bean("paymentFeeder")
-    @DependsOn({"userFeeder","merchantFeeder"})
-    public PaymentFeeder paymentFeeder() { return new PaymentFeeder(); }
+    public PaymentFeeder paymentFeeder(GigaSpace gigaSpace, UserFeeder userFeeder, MerchantFeeder merchantFeeder) throws Exception {
+        PaymentFeeder feeder = new PaymentFeeder();
+        feeder.setGigaSpace(gigaSpace);
+        // Manually call the initialization method since @PostConstruct is not being invoked
+        feeder.construct();
+        return feeder;
+    }
 
     @Bean("paymentFeederGenerator")
-    @DependsOn("paymentFeeder")
-    public PaymentFeederGenerator paymentFeederGenerator() { return new PaymentFeederGenerator(); }
+    public PaymentFeederGenerator paymentFeederGenerator(PaymentFeeder paymentFeeder) throws Exception {
+        PaymentFeederGenerator generator = new PaymentFeederGenerator();
+        generator.setPaymentFeeder(paymentFeeder);
+        // Manually call the initialization method since @PostConstruct is not being invoked
+        generator.construct();
+        return generator;
+    }
 
     public static void main(String[] args) {
         SpringApplication app = new SpringApplication(Main.class);

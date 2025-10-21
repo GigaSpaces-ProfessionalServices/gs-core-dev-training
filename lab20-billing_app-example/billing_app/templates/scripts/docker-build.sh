@@ -12,7 +12,7 @@ echo "########################################"
 echo "# Building the processor for Docker..."
 echo "########################################"
 cd $SCRIPTS_DIR/../processor && \
-docker buildx build --platform linux/amd64 --push --no-cache -t {{docker.username}}/processor:{{app.docker.version}} .
+docker buildx build --platform linux/amd64,linux/arm64 --push --no-cache -t {{docker.username}}/processor:{{app.docker.version}} .
 
 #docker build --no-cache -t {{docker.username}}/processor:{{app.docker.version}} .
 #docker push {{docker.username}}/processor:{{app.docker.version}}
@@ -22,7 +22,7 @@ echo "########################################"
 echo "# Building the payment-feeder for Docker..."
 echo "########################################"
 cd $SCRIPTS_DIR/../payment-feeder && \
-docker buildx build --platform linux/amd64 --push --no-cache -t {{docker.username}}/payment-feeder:{{app.docker.version}} .
+docker buildx build --platform linux/amd64,linux/arm64--push --no-cache -t {{docker.username}}/payment-feeder:{{app.docker.version}} .
 
 #docker build --no-cache -t {{docker.username}}/payment-feeder:{{app.docker.version}} .
 #docker push {{docker.username}}/payment-feeder:{{app.docker.version}}
@@ -32,7 +32,7 @@ echo "########################################"
 echo "# Building the rest-application for Docker..."
 echo "########################################"
 cd $SCRIPTS_DIR/../rest-application && \
-docker buildx build --platform linux/amd64 --push --no-cache -t {{docker.username}}/rest-app:{{app.docker.version}} .
+docker buildx build --platform linux/amd64,linux/arm64 --push --no-cache -t {{docker.username}}/rest-app:{{app.docker.version}} .
 
 #docker build --no-cache -t {{docker.username}}/rest-app:{{app.docker.version}} .
 #docker push {{docker.username}}/rest-app:{{app.docker.version}}

@@ -1,9 +1,9 @@
 gigaspaces:
-  version: 17.1.0
-  home: /home/dixson/gigaspaces-smart-cache-enterprise-17.1.0
+  version: 17.1.2
+  home: /Users/aharonmoll/Documents/GigaSpaces/gigaspaces-smart-cache-enterprise-17.1.2
 
 docker:
-  username: dixsonhuie1
+  username: aharon172
 
 spring:
   framework:

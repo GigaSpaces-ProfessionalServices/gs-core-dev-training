@@ -40,7 +40,10 @@ public class PaymentFeederGenerator {
     @Resource
     private PaymentFeeder paymentFeeder;
 
- 
+    public void setPaymentFeeder(PaymentFeeder paymentFeeder) {
+        this.paymentFeeder = paymentFeeder;
+    }
+
     @PostConstruct
     public void construct() throws Exception {
         log.info("Starting PaymentFeeder");
