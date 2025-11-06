@@ -19,7 +19,7 @@ package com.mycompany.app.rest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.mycompany.app.model.*;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 import org.openspaces.core.GigaSpace;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -71,14 +71,14 @@ public class DataController {
     }
 
 
-    @ApiOperation(value = "Welcome")
+    @Operation(summary = "Welcome")
     @GetMapping("/")
     public ResponseEntity<String> welcome(){
         return new ResponseEntity<>("Welcome to space Rest API example! Working with space:"  + spaceName, HttpStatus.OK);
     }
 
     // get objects:
-    @ApiOperation(value="Get users",notes="Returns the users")
+    @Operation(summary="Get users", description="Returns the users")
     @PostMapping("/users")
     public ResponseEntity<String> users() throws Exception {
         logger.log(Level.INFO, "========== users was called:" + spaceName);
@@ -104,7 +104,7 @@ public class DataController {
     }
 
 
-    @ApiOperation(value="Get merchants",notes="Returns the merchants")
+    @Operation(summary="Get merchants", description="Returns the merchants")
     @PostMapping("/merchants")
     public ResponseEntity<String> merchants() throws Exception {
         logger.log(Level.INFO, "========== merchants was called:" + spaceName);
@@ -116,7 +116,7 @@ public class DataController {
     }
 
     // totals and reducers:
-    @ApiOperation(value="Provide summary information for the application",notes="Provide summary information for the application")
+    @Operation(summary="Provide summary information for the application", description="Provide summary information for the application")
     @PostMapping("/totals")
     public ResponseEntity<String> totals() throws Exception {
         logger.log(Level.INFO, "========== totals was called:" + spaceName);
@@ -136,7 +136,7 @@ public class DataController {
         return  new ResponseEntity<>(json, HttpStatus.OK);
     }
 
-    @ApiOperation(value="Get top 5 merchants",notes="Get top 5 merchants based on merchant fee amounts")
+    @Operation(summary="Get top 5 merchants", description="Get top 5 merchants based on merchant fee amounts")
     @PostMapping("/topmerchants")
     public ResponseEntity<String> topMerchants() throws Exception {
         logger.log(Level.INFO, "========== top merchants was called:" + spaceName);
@@ -146,7 +146,7 @@ public class DataController {
         return  new ResponseEntity<>(json, HttpStatus.OK);
     }
 
-    @ApiOperation(value="Get top 10 payments",notes="Get top 10 payments based on payment amounts")
+    @Operation(summary="Get top 10 payments", description="Get top 10 payments based on payment amounts")
     @PostMapping("/toppayments")
     public ResponseEntity<String> topPayments() throws Exception {
         logger.log(Level.INFO, "========== top payments was called:" + spaceName);
@@ -156,7 +156,7 @@ public class DataController {
         return  new ResponseEntity<>(json, HttpStatus.OK);
     }
 
-    @ApiOperation(value="Get top 10 processing fees",notes="Get top 10 processing fees based on process fee amounts")
+    @Operation(summary="Get top 10 processing fees", description="Get top 10 processing fees based on process fee amounts")
     @PostMapping("/topprocessingfees")
     public ResponseEntity<String> topProcessingFees() throws Exception {
         logger.log(Level.INFO, "========== top processing fees was called:" + spaceName);
@@ -167,7 +167,7 @@ public class DataController {
     }
 
     // drill-down
-    @ApiOperation(value="Get payments",notes="Inputs are type merchant or user and the id")
+    @Operation(summary="Get payments", description="Inputs are type merchant or user and the id")
     @PostMapping("/payments")
     public ResponseEntity<String> showPayments(@RequestBody Map<String,Object> properties) throws Exception {
         logger.log(Level.INFO, "========== show payments was called:" + spaceName);
@@ -192,7 +192,7 @@ public class DataController {
         }
     }
 
-    @ApiOperation(value="Get payment detail",notes="Input is the payment id")
+    @Operation(summary="Get payment detail", description="Input is the payment id")
     @PostMapping("/paymentdetails")
     public ResponseEntity<String> paymentDetails(@RequestParam String id) throws Exception {
         logger.log(Level.INFO, "========== payment details was called:" + spaceName);
@@ -203,7 +203,7 @@ public class DataController {
         return  new ResponseEntity<>(json.toString(), HttpStatus.OK);
     }
 
-    @ApiOperation(value="Get processing fees",notes="Input is the merchant id")
+    @Operation(summary="Get processing fees", description="Input is the merchant id")
     @PostMapping("/processingfees")
     public ResponseEntity<String> processingFees(@RequestParam int id) throws Exception {
         logger.log(Level.INFO, "========== processing fees was called:" + spaceName);
@@ -216,7 +216,7 @@ public class DataController {
         return  new ResponseEntity<>(json, HttpStatus.OK);
     }
 
-    @ApiOperation(value="Get contract",notes="Input is the merchant id")
+    @Operation(summary="Get contract", description="Input is the merchant id")
     @PostMapping("/contract")
     public ResponseEntity<String> contract(@RequestParam int id) throws Exception {
         logger.log(Level.INFO, "========== contract was called:" + spaceName);
@@ -229,7 +229,7 @@ public class DataController {
     }
 
     // update
-    @ApiOperation(value="Update contract transaction percent fee",notes="Input is the merchant id of the contract")
+    @Operation(summary="Update contract transaction percent fee", description="Input is the merchant id of the contract")
     @PostMapping("/settransactionpercentfee")
     public ResponseEntity<String> setTransactionPercentFee(@RequestBody Map<String,Object> properties) throws Exception {
         logger.log(Level.INFO, "========== set transaction percent fee was called:" + spaceName);

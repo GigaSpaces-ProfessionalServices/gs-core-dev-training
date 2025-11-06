@@ -15,7 +15,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <gigaspaces.version>{{gigaspaces.version}}</gigaspaces.version>
         <spring.boot.version>{{spring.boot.version}}</spring.boot.version>
-        <springfox.version>{{springfox.version}}</springfox.version>
+        <springdoc.version>{{springdoc.version}}</springdoc.version>
         <jackson.version>2.15.4</jackson.version>
     </properties>
 
@@ -40,7 +40,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
+<!--
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-boot-starter</artifactId>
@@ -51,6 +51,12 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
             <version>${springfox.version}</version>
+        </dependency>
+    -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>${springdoc.version}</version>
         </dependency>
 
         <dependency>

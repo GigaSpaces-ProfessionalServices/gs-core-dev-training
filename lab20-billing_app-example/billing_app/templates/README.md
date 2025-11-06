@@ -124,14 +124,15 @@ You should see a list of types. See screenshot below.
 
 2. You can also run queries from the ops-ui. Choose the 'SQL Editor' pane. We have run `SELECT * from "com.mycompany.app.model.User" LIMIT 10`
 ![Screenshot of query](https://github.com/GigaSpaces-ProfessionalServices/gs-core-dev-training/blob/main/lab20-billing_app-example/Pictures/ops_ui-query.png)
-3. You can check the rest application by running curl commands against it.  
-
+3. Go to `localhost:8080/swagger-ui/index.html`. This is the REST applications's Swagger endpoint. You can use this to experiment with the REST commands.
+4. Or you can check the rest application by running curl commands against it.
 Visit this [page](example_curl_commands.md) for a list of curl commands that can be run.
 
 ## Other Kubernetes environment
 1. To get access to the ops ui, `kubectl port-forward svc/xap-manager-service 8090:8090`. The ops-ui should be available on `localhost:8090`. Check the minikube section above for notes on the ops-ui.
 2. For the rest application, `kubectl port-forward deployment/rest-app 8080:8080`.  
-Visit this [page](example_curl_commands.md) for a list of curl commands that can be run.
+3. Go to `localhost:8080/swagger-ui/index.html`. This is the REST applications's Swagger endpoint. You can use this to experiment with the REST commands.
+4. Alternatively, visit this [page](example_curl_commands.md) for a list of curl commands that can be run.
 
 ## 3. Run on local desktop
 
@@ -145,7 +146,8 @@ Start the service grid
    *This creates the users and the merchants. It also runs continuously, simulating payments transactions*
 4. Deploy the REST application. In a new console window, run `scripts/run-rest-app.sh`  
    *The REST application is used for reporting on the bill payment application*
-5. Visit this [page](example_curl_commands.md) for a list of curl commands that can be run.
+5. Go to `localhost:8080/swagger-ui/index.html`. This is the REST applications's Swagger endpoint. You can use this to experiment with the REST commands.
+6. Alternatively, visit this [page](example_curl_commands.md) for a list of curl commands that can be run.
 
 ## 4. Troubleshooting
 

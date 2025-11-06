@@ -1,18 +1,18 @@
 gigaspaces:
-  version: 17.1.0
-  home: /home/dixson/gigaspaces-smart-cache-enterprise-17.1.0
+  version: 17.1.2
+  home: /home/dixson/gigaspaces-smart-cache-enterprise-17.1.2
 
 docker:
   username: dixsonhuie1
 
 spring:
   framework:
-    version: 5.3.29
+    version: 6.2.1
   boot:
-    version: 2.7.9
+    version: 3.4.7
 
-springfox:
-  version: 3.0.0
+springdoc:
+  version: 2.7.0
 
 app:
   version: 1.0-SNAPSHOT

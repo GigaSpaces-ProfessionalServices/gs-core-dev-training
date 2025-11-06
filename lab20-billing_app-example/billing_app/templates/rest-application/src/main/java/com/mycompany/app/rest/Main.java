@@ -16,6 +16,10 @@
 
 package com.mycompany.app.rest;
 
+import io.swagger.v3.oas.models.ExternalDocumentation;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.License;
 import org.openspaces.core.GigaSpace;
 import org.openspaces.core.GigaSpaceConfigurer;
 import org.openspaces.core.space.SpaceProxyConfigurer;
@@ -28,10 +32,6 @@ import org.springframework.context.annotation.*;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.bind.annotation.RestController;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
-//import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
 @RestController
@@ -41,7 +41,10 @@ import springfox.documentation.spring.web.plugins.Docket;
 @EnableTransactionManagement
 @PropertySource("classpath:application.properties")
 //@EnableSwagger2
-@SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
+@SpringBootApplication(exclude = {
+    SecurityAutoConfiguration.class,
+    org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration.class
+})
 public class Main {
 
 
@@ -87,12 +90,26 @@ public class Main {
         return new GigaSpaceConfigurer(configurer).transactionManager(ptm).gigaSpace();
     }
 
+    /*
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2).select()
                 .apis(RequestHandlerSelectors.basePackage("com.gs")).build();
     }
 
+     */
+
+    @Bean
+    public OpenAPI springShopOpenAPI() {
+        return new OpenAPI()
+                .info(new Info().title("BillBuddy Rest Application")
+                        .description("BillBuddy Sample Rest Application")
+                        .version("v0.0.1")
+                        .license(new License().name("Apache 2.0").url("http://springdoc.org")))
+                .externalDocs(new ExternalDocumentation()
+                        .description("GigaSpaces Developer's Training")
+                        .url("https://github.com/GigaSpaces-ProfessionalServices/gs-core-dev-training"));
+    }
     public static void main(String[] args) {
 
         SpringApplication app = new SpringApplication(Main.class);
