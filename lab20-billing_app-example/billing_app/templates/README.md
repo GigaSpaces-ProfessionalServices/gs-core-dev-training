@@ -123,8 +123,9 @@ You should see a list of types. See screenshot below.
 ![Screenshot of types](https://github.com/GigaSpaces-ProfessionalServices/gs-core-dev-training/blob/main/lab20-billing_app-example/Pictures/ops_ui-types.png)
 
 2. You can also run queries from the ops-ui. Choose the 'SQL Editor' pane. We have run `SELECT * from "com.mycompany.app.model.User" LIMIT 10`
-![Screenshot of query](https://github.com/GigaSpaces-ProfessionalServices/gs-core-dev-training/blob/main/lab20-billing_app-example/Pictures/ops_ui-query.png)
+   ![Screenshot of query](https://github.com/GigaSpaces-ProfessionalServices/gs-core-dev-training/blob/main/lab20-billing_app-example/Pictures/ops_ui-query.png)
 3. Go to `localhost:8080/swagger-ui/index.html`. This is the REST applications's Swagger endpoint. You can use this to experiment with the REST commands.
+   ![Screenshot of rest app swagger](https://github.com/GigaSpaces-ProfessionalServices/gs-core-dev-training/blob/main/lab20-billing_app-example/Pictures/rest_app-swagger.png)
 4. Or you can check the rest application by running curl commands against it.
 Visit this [page](example_curl_commands.md) for a list of curl commands that can be run.
 
