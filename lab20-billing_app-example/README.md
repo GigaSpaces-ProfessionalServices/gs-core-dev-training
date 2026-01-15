@@ -5,5 +5,6 @@ A blueprint is a template for a maven project. Use the instructions below to gen
 1. Copy the `billing_app` directory to the `$GS_HOME/config/blueprints` directory. For example `cp -r billing_app /home/dixson/gigaspaces-smart-cache-enterprise/config/blueprints`.
 2. Go to the `$GS_HOME/bin` directory.
 3. Generate the blueprints, for example: `./gs.sh blueprint generate billing_app billing_app`. This will generate the project in a sub-directory below the bin directory, for example: `$GS_HOME/bin/billing_app`
+4. See the instructions in the `README.md` found in the billing_app project folder.
 
 
