@@ -41,7 +41,7 @@ echo ########################################
 
 echo ########################################
 echo # Installing space...
-helm install processor cache/xap-pu --version {{gigaspaces.version}} --set schema=partitioned,partitions=1,ha=false,resourceUrl=pu.jar,image.repository={{docker.username}}/processor,image.tag={{app.docker.version}},java.options="-Dcom.gs.hsqldb.all-metrics-recording.enabled=false"
+helm install processor cache/xap-pu --version {{gigaspaces.version}} --set global.security.enabled=false,schema=partitioned,partitions=1,ha=false,resourceUrl=pu.jar,image.repository={{docker.username}}/processor,image.tag={{app.docker.version}},java.options="-Dcom.gs.hsqldb.all-metrics-recording.enabled=false"
 echo # Space helm install done.
 echo ########################################
 
