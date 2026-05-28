@@ -1,6 +1,6 @@
 # gs-core-dev-training - lab15-durable_tasks-example
 
-This lab explores GigaSpaces Durable Tasks — Distributed Tasks that can be canceled and recovered. Two use cases are covered: long-running jobs that need the ability to cancel mid-execution, and business logic tasks that run persistently in the Space and survive failover without redeployment.
+This lab explores GigaSpaces Durable Tasks - Distributed Tasks that can be canceled and recovered. Two use cases are covered: long-running jobs that need the ability to cancel mid-execution, and business logic tasks that run persistently in the Space and survive failover without redeployment.
 
 ## Goals
 1. Understand two use cases of Durable Tasks.
