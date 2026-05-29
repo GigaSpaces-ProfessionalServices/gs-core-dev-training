@@ -15,11 +15,11 @@ public class CancelDurableTask {
     public static long WAIT_TIME = 3000;
     public static void main(String[] args) throws Exception {
         GigaSpace gs = new GigaSpaceConfigurer(new SpaceProxyConfigurer("demo")).gigaSpace();
-        CancelDurableTask test = new CancelDurableTask();
-        test.runDurable(gs);
+        CancelDurableTask cancelDurableTask = new CancelDurableTask();
+        cancelDurableTask.registerAndUnRegisterDurable(gs);
     }
 
-    public void runDurable(GigaSpace gs) throws Exception{
+    public void registerAndUnRegisterDurable(GigaSpace gs) throws Exception{
         UUID taskId = gs.registerDurableTask(new CancelableCountTask());
         AsyncFuture<Long> future = gs.executeDurable(taskId);
         future.setListener(result -> {

@@ -9,11 +9,11 @@ import java.util.UUID;
 public class RegisterDurableTask {
     public static void main(String[] args) {
         GigaSpace gs = new GigaSpaceConfigurer(new SpaceProxyConfigurer("demo")).gigaSpace();
-        RegisterDurableTask test = new RegisterDurableTask();
-        test.runDurable(gs);
+        RegisterDurableTask registerDurableTask = new RegisterDurableTask();
+        registerDurableTask.runDurableTask(gs);
     }
 
-    public void runDurable(GigaSpace gs) {
+    public void runDurableTask(GigaSpace gs) {
         UUID taskId = gs.registerDurableTask(new EmbeddedPollingDurableTask());
         System.out.println("Event task started embedded event container: " + taskId);
         /* This task should be unregistered only if we want to change business logic.
