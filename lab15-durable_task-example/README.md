@@ -86,4 +86,5 @@ For a long-running task, this should be false and `execute()` should be called e
 7. Run DataGen to write data to the Space.
 8. See the console log - events are processed.
 9. Run CancelDurableTask - This registers and executes `CancelableCountTask`, waits `WAIT_TIME` (default 3 seconds), then unregisters it.
-10. Change `WAIT_TIME` to a longer period in `CancelDurableTask.java` and observe the REST API while the task is running and after it ends.
+10. Change `WAIT_TIME` to a longer period in `CancelDurableTask.java` and observe the REST API while the task is running and after it ends.  
+    Note: You can also use the REST API to unregister a Durable Task: http://localhost:9090/api/v3/swagger-ui/index.html#/Spaces/unregisterDurableTask
