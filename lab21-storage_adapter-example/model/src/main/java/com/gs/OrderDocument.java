@@ -1,23 +1,24 @@
 package com.gs;
 
 import com.gigaspaces.annotation.pojo.*;
-import com.gigaspaces.metadata.index.SpaceIndexType;
 import com.gs.CompressedXmlPropertiesAdapter;
 
+import java.io.Serializable;
 import java.util.Map;
 
 @SpaceClass
-public  class OrderDocument {
+public class OrderDocument implements Serializable {
 
     private String id;
 
-    private XMLProperty orderData;
+    private XmlProperty orderData;
 
     private Map<String, Object> orderDataKeyProps;
 
     private String customerId;
 
-    @SpaceId
+    @SpaceId(autoGenerate = false)
+    @SpaceRouting
     public String getId() {
         return id;
     }
@@ -26,16 +27,23 @@ public  class OrderDocument {
         this.id = id;
     }
 
+    /*
+       doNothing() was a legacy IDE workaround. Older IntelliJ versions flagged imports used only
+       in annotation parameters (e.g. CompressedXmlPropertiesAdapter.class above) as "unused" and
+       would remove them during code cleanup. A method-body reference prevented that. Modern IntelliJ
+       correctly recognizes annotation class references as usages, so the workaround is no longer needed.
+
     private void doNothing(){
-        CompressedXmlPropertiesAdapter CompressedXmlPropertiesAdapter;
+       CompressedXmlPropertiesAdapter CompressedXmlPropertiesAdapter;
     }
+     */
 
     @SpacePropertyStorageAdapter(CompressedXmlPropertiesAdapter.class)
-    public XMLProperty getOrderData() {
+    public XmlProperty getOrderData() {
         return orderData;
     }
 
-    public void setOrderData(XMLProperty orderData) {
+    public void setOrderData(XmlProperty orderData) {
         this.orderData = orderData;
     }
 
@@ -49,7 +57,7 @@ public  class OrderDocument {
     }
 
     /*
-    Those properties can be added and indexed once identified
+       Properties can be added and indexed once identified
      */
     public Map<String, Object> getOrderDataKeyProps() {
         return orderDataKeyProps;

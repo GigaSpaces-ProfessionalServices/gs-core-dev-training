@@ -1,4 +1,5 @@
-package com.gs;/*
+package com.gs;
+/*
  * Copyright (c) 2008-2019, GigaSpaces Technologies, Inc. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,15 +26,15 @@ import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 
 /**
- * Adapter for storing compressed XML in space within XMLProperty objects.
+ * Adapter for storing compressed XML in space within XmlProperty objects.
  *
  * Stores XML content as compressed bytes in the space and provides both the
  * decompressed XML content and parsed properties (Map<String, Object>) representing
  * the XML structure, allowing direct property access and indexing of nested values.
  *
- * Input: XMLProperty with xmlContent set to an XML string
+ * Input: XmlProperty with xmlContent set to an XML string
  * Storage: Compressed bytes of the XML content
- * Output: XMLProperty with both xmlContent (decompressed) and properties (parsed Map)
+ * Output: XmlProperty with both xmlContent (decompressed) and properties (parsed Map)
  *
   */
 public class CompressedXmlPropertiesAdapter extends PropertyStorageAdapter {
@@ -62,7 +63,7 @@ public class CompressedXmlPropertiesAdapter extends PropertyStorageAdapter {
 
     @Override
     public boolean supportsEqualsMatching() {
-        return true;  // Maps don't support direct equals matching
+        return true;  // equality matching on the compressed bytes is supported
     }
 
     @Override
@@ -75,10 +76,10 @@ public class CompressedXmlPropertiesAdapter extends PropertyStorageAdapter {
         if (value == null) {
             return null;
         }
-        if (!(value instanceof XMLProperty)) {
-            throw new IOException("CompressedXmlPropertiesAdapter only accepts XMLProperty values, received: " + value.getClass().getName());
+        if (!(value instanceof XmlProperty)) {
+            throw new IOException("CompressedXmlPropertiesAdapter only accepts XmlProperty values, received: " + value.getClass().getName());
         }
-        XMLProperty xmlProperty = (XMLProperty) value;
+        XmlProperty xmlProperty = (XmlProperty) value;
         String xmlString = xmlProperty.getXmlContent();
         if (xmlString == null || xmlString.isEmpty()) {
             return null;
@@ -94,7 +95,7 @@ public class CompressedXmlPropertiesAdapter extends PropertyStorageAdapter {
         }
         byte[] compressed = unwrapBinary(value);
         String xmlString = decompressXml(compressed);
-        XMLProperty xmlProperty = new XMLProperty();
+        XmlProperty xmlProperty = new XmlProperty();
         xmlProperty.setXmlContent(xmlString);
         return xmlProperty;
     }

@@ -3,15 +3,15 @@ package com.gs;
 import java.io.IOException;
 import java.util.*;
 
-public class XMLProperty {
+public class XmlProperty {
     String xmlContent;
     Map<String,Object> properties;
     private XmlParser xmlParser = new XmlParser();
 
-    public XMLProperty() {
+    public XmlProperty() {
     }
 
-    public XMLProperty(String xmlContent) {
+    public XmlProperty(String xmlContent) {
         try {
             setXmlContent(xmlContent);
         } catch (IOException e) {
@@ -19,7 +19,7 @@ public class XMLProperty {
         }
     }
 
-    public XMLProperty(Map<String, Object> properties) {
+    public XmlProperty(Map<String, Object> properties) {
         this.properties = properties;
     }
 
@@ -44,8 +44,8 @@ public class XMLProperty {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        XMLProperty that = (XMLProperty) o;
-        if (xmlContent != null && ((XMLProperty) o).getXmlContent() !=null)
+        XmlProperty that = (XmlProperty) o;
+        if (xmlContent != null && ((XmlProperty) o).getXmlContent() !=null)
             return xmlContent.equals(that.xmlContent);
         else {
             if (properties != null && that.properties !=null)
