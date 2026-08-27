@@ -6,13 +6,12 @@ import org.openspaces.core.GigaSpaceConfigurer;
 import org.openspaces.core.space.SpaceProxyConfigurer;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 public class DataGen {
 
     public static void main(String[] args) throws Exception {
-        GigaSpace gs = new GigaSpaceConfigurer(new SpaceProxyConfigurer("demo").lookupGroups("xap-17.2.2")).
+        GigaSpace gs = new GigaSpaceConfigurer(new SpaceProxyConfigurer("demo")).
                 gigaSpace();
         DataGen dataGenerator = new DataGen();
         //dataGenerator.writeData(gs);
@@ -31,7 +30,7 @@ public class DataGen {
             );
             OrderDocument results1 = gigaSpace.read(queryByName);
             System.out.println("Orders for John: " + results1);
-
+            //TODO
             // Query 2: Range query on indexed numeric property
             /*SQLQuery<OrderDocument> queryByTotal = new SQLQuery<>(
                     OrderDocument.class,
@@ -95,10 +94,15 @@ public class DataGen {
 
            // Map<String, Object> orderData = new HashMap<>();
            // orderData.put("xmlContent", xmlContent);
-            order.setOrderData(new XMLProperty(xmlContent));
+            order.setOrderData(new XmlProperty(xmlContent));
 
             orders.add(order);
         }
-        orders.forEach(o -> gs.write(o));
+        // TODO
+        int batchSize = 100;
+        for (int i = 0; i < orders.size(); i += batchSize) {
+            List<OrderDocument> batch = orders.subList(i, Math.min(i + batchSize, orders.size()));
+            gs.writeMultiple(batch.toArray(new OrderDocument[0]));
+        }
     }
 }
