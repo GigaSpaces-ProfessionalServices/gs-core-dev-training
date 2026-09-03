@@ -168,7 +168,7 @@ public class JdbcV3Client extends AbstractJdbcClient {
         String queryPrefix = "select * from  \"" + Customer.class.getName()+"\"" +" where ";
         String query = queryPrefix + "lastName = ? order by firsName DESC NULLS LAST";
         Object[] paramters = new Object[1];
-        paramters[0]="Choen";
+        paramters[0]="Cohen";
         read(connection,query,paramters);
     }
 

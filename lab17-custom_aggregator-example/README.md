@@ -26,7 +26,7 @@ and reduced in the client, several aggrgation can be sent together in aggregatio
  
 ####### What are custom aggregations
 When needed you can define your own custom aggregation by extending SpaceEntriesAggregator
-In the example CustomINAggregator we extends AbstractPathAggregator which extends SpaceEntriesAggregator adding common functionality to one field based aggregation
+In the example CustomInAggregator we extends AbstractPathAggregator which extends SpaceEntriesAggregator adding common functionality to one field based aggregation
  
 
 ###### Instructions
@@ -49,7 +49,7 @@ In the example CustomINAggregator we extends AbstractPathAggregator which extend
    Please see the main [README.md](https://github.com/GigaSpaces-ProfessionalServices/gs-core-dev-training/blob/main/README.md) for setting path values (environment variables in File | Settings | Appearance & Behavior | Path Values) used when running within Intellij.  
 5. Build the project: `mvn package`
 6. Run DataGen to write data to the space.
-7. Go over CustomINAggregator code
-8. Run TestInAggrgator
+7. Go over CustomInAggregator code
+8. Run TestInAggregator
 
 #### Note: There is no need to define custom aggrgation for IN as shown in this example by default the IN condition use index

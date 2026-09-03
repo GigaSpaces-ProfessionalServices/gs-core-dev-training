@@ -58,7 +58,8 @@ export GS_OPTIONS_EXT="-Dcom.gs.protectiveMode.queryWithoutIndex=false"
 
 ### Expected Results
 
-1. Running without the hint and with no routing takes much longer in this scenario, and the engine logs a protective mode warning.  
-2. When the hint is used, no protective mode warning is logged, as conditions are implicitly added.  
-3. `com.gs.colocated.StudentCourses` routes by `courseId`, making its join with `Courses` (which routes by `id`) colocated - results are much better than those without the hint in the JDBC query.  
-Since the plan is cached, the second execution is faster than the first. Running services typically encounter the same query patterns repeatedly, so the cached plan benefit compounds over time.
+1. Running without the hint and with no routing takes much longer than the other strategies - `Courses` and `StudentCourses` both require full scans across all partitions with no filtering.
+2. The protective mode warning (`The query contains unIndexed fields`) appears in the GSC log for all three JDBC strategies, not just the no-hint case. This is because `Courses` has no index on the join field and always requires a full scan regardless of the hint. The `DYNAMIC_FILTER` hint reduces the scan on `StudentCourses` (replacing a full scan with a targeted dynamic filter), but does not eliminate the `Courses` full scan.
+3. `joinWithDynamicFilter` is significantly faster than the other JDBC strategies. The hint causes XAP to use the routing keys derived from the `Student` result to filter `StudentCourses` partition-by-partition, rather than scatter-gathering the full table. The final `Courses` scan is still full but operates on a smaller intermediate result set.
+4. `com.gs.colocated.StudentCourses` routes by `courseId`, aligning it with `Courses` (which routes by `id`). However, in this three-way join, the optimizer cannot exploit that colocation because the first join (Student → StudentCourses) produces an intermediate result rather than a base table access, preventing a partition-local join for the second leg.
+5. Since the query plan is cached, the second run is faster than the first across all strategies. Running services typically encounter the same query patterns repeatedly, so the cached plan benefit compounds over time.

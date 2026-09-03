@@ -27,7 +27,7 @@ Make sure you restart the service grid and gs-ui (or at least undeploy all Proce
    Run `./gs.sh demo` or `gs.bat demo`
 
    *This starts an agent, manager, 4 gscs, restv3 and the webui. It also deploys a space named 'demo' with 2 partitions and 1 backup apiece.*
-2. Open gs-dev-training/lab21-storage-adapter-example project with IntelliJ (open pom.xml)
+2. Open gs-dev-training/lab21-storage_adapter-example project with IntelliJ (open pom.xml)
 3. Run `mvn compile`
 
 ## Examine the code
@@ -55,7 +55,7 @@ In `DataGen.main()`, uncomment `writeData` to populate the space, then re-run wi
 
 ###### Option 1 - Using Maven CLI:
 
-`cd ~/gs-core-dev-training/lab21-storage-adapter-example/feeder`
+`cd ~/gs-core-dev-training/lab21-storage_adapter-example/feeder`
 
 `mvn exec:java -D"exec.mainClass"="com.gs.DataGen" -Dexec.classpathScope=compile -Dcom.gs.jini_lus.locators=localhost`
 

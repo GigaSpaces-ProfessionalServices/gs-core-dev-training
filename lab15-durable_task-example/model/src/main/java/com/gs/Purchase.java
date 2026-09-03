@@ -12,7 +12,7 @@ public class Purchase {
     private Integer amount;
     private Integer customerId;
     private Integer productId;
-    private PurchaseStatus purchaseStatus = PurchaseStatus.NEW;
+    private Boolean processed = false;
 
 
     public Purchase() {
@@ -24,16 +24,16 @@ public class Purchase {
         this.productId = productId;
     }
 
-    public Purchase(PurchaseStatus purchaseStatus) {
-        this.purchaseStatus = purchaseStatus;
+    public Purchase(Boolean processed) {
+        this.processed = processed;
     }
 
-    public PurchaseStatus getPurchaseStatus() {
-        return purchaseStatus;
+    public Boolean getProcessed() {
+        return processed;
     }
 
-    public void setPurchaseStatus(PurchaseStatus purchaseStatus) {
-        this.purchaseStatus = purchaseStatus;
+    public void setProcessed(Boolean processed) {
+        this.processed = processed;
     }
 
     @SpaceId(autoGenerate = true)

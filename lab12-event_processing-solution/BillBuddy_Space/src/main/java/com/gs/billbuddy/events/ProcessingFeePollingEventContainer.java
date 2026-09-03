@@ -3,7 +3,7 @@ package com.gs.billbuddy.events;
 
 import java.util.Calendar;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 
 

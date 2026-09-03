@@ -15,11 +15,20 @@ Download the zip from this repository and extract it, preferably to your home di
  
 ## Contents
 
- * gs-dev-jupyter-lab
- * Lab 11 Space Based Remoting
- * Lab 12 Event Processing
- * Lab 13 Transactions
- * Lab 14 Persistency
+| Lab | Topic                                                                                                                               | Directories |
+|----|-------------------------------------------------------------------------------------------------------------------------------------|---|
+| -  | Jupyter notebooks covering the core GigaSpaces API: reads/writes/queries, the Change API, colocated Task execution, and aggregation | `gs-dev-jupyter-lab` |
+| 11 | Space-Based Remoting - broadcast and routed executor remoting patterns against the BillBuddy sample app                             | `lab11-space_based_remoting-exercise`, `lab11-space_based_remoting-solution` |
+| 12 | Event Processing - `@Polling`/`@Notify` event containers                                                                            | `lab12-event_processing-exercise`, `lab12-event_processing-solution` |
+| 13 | Transactions - transactional event processing                                                                                       | `lab13-transactions-exercise`, `lab13-transactions-solution` |
+| 14 | Persistency - Mirror Service, asynchronous persistence to an external database                                                      | `lab14-persistency-exercise`, `lab14-persistency-solution` |
+| 15 | Durable Task - registering a durable, failover-surviving business logic task                                                        | `lab15-durable_task-example` |
+| 16 | JDBC v3 - SQL queries, joins, aggregates, and dynamic DDL/DML via the GigaSpaces JDBC driver                                        | `lab16-jdbc_v3-example` |
+| 17 | Custom Aggregator - a custom `SpaceEntriesAggregator` compared against an equivalent plain SQL query                                | `lab17-custom_aggregator-example` |
+| 18 | Dynamic Filter - the JDBC `DYNAMIC_FILTER` hint and how routing alignment affects colocated joins                                   | `lab18-dynamic_filter-example` |
+| 19 | Distributed Tracing - OpenTelemetry-based tracing with Zipkin as the backend                                                        | `lab19-distributed_tracing-example` |
+| 20 | Billing App - a full blueprint-generated multi-module billing application, deployable locally or to Kubernetes                      | `lab20-billing_app-example` |
+| 21 | Property Storage Adapter - a custom `PropertyStorageAdapter` that transparently compresses an XML property                          | `lab21-storage_adapter-example` |
 
 ##### Note 1 - Downloading Gigaspaces jars
 

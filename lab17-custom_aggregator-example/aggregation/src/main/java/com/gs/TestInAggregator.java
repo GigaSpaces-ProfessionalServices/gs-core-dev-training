@@ -10,10 +10,10 @@ import org.openspaces.core.space.SpaceProxyConfigurer;
 import java.sql.*;
 import java.util.*;
 
-public class TestInAggrgator {
+public class TestInAggregator {
     public static void main(String[] args) throws Exception {
         GigaSpace gs = new GigaSpaceConfigurer(new SpaceProxyConfigurer("demo")).gigaSpace();
-        TestInAggrgator test = new TestInAggrgator();
+        TestInAggregator test = new TestInAggregator();
         test.runAggrgator(gs);
         test.runWithoutAggrgator(gs);
     }
@@ -31,7 +31,7 @@ public class TestInAggrgator {
 
     private void runAggrgator(GigaSpace gs) throws Exception{
         SQLQuery<Courses> studentCoursesQuery = new SQLQuery<Courses>(Courses.class, "");
-        CustomINAggregator customINAggregator  = new CustomINAggregator("id", getStudentCoursesIds(1, gs));
+        CustomInAggregator customINAggregator  = new CustomInAggregator("id", getStudentCoursesIds(1, gs));
         AggregationSet aggregationSet = new AggregationSet();
         aggregationSet.add(customINAggregator);
         long start=System.currentTimeMillis();

@@ -20,6 +20,7 @@ In another console window,
 ```
 $GS_HOME/bin/gs-ui.sh
 ```
+(Use the CLI equivalents, e.g. `gs.sh space info --type-stats <space-name>` to check what's deployed and `gs.sh service undeploy <name>` to undeploy.)
 
 **1.1** Open gs-core-dev-training/lab11-space_based_remoting-solution project with Intellij (open pom.xml)<br>
 **1.2** Run mvn package
