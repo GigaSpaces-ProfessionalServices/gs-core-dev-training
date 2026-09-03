@@ -35,7 +35,7 @@ import org.openspaces.core.GigaSpace;
 import org.openspaces.core.aggregators.GigaSpaceAggregation;
 
 @SupportCodeChange(id="1")
-public class CustomINAggregator extends AbstractPathAggregator<ArrayList<Object>> implements Externalizable {
+public class CustomInAggregator extends AbstractPathAggregator<ArrayList<Object>> implements Externalizable {
 
    //injection of local space instance if needed (not used in this example)
     @GigaSpaceAggregation
@@ -55,12 +55,12 @@ public class CustomINAggregator extends AbstractPathAggregator<ArrayList<Object>
     @Override
     public String getName() {return "IN"; }
 
-    public CustomINAggregator() {
+    public CustomInAggregator() {
         super();
     }
 
 
-    public CustomINAggregator(String propertyName, Collection<Object> collection) {
+    public CustomInAggregator(String propertyName, Collection<Object> collection) {
         super();
         setPath(propertyName);
         this.collection = collection;

@@ -27,12 +27,12 @@ public class EmbeddedPollingDurableTask implements DurableTask<Boolean, Boolean>
         }
         @Override
         public Boolean execute() throws Exception {
-            pollingEventListenerContainer = new SimplePollingContainerConfigurer(gigaSpace).template(new Purchase(PurchaseStatus.NEW))
+            pollingEventListenerContainer = new SimplePollingContainerConfigurer(gigaSpace).template(new Purchase(false))
                     .autoStart(true).eventListenerAnnotation(new Object() {
                         @SpaceDataEvent
                         public void eventHappened(Purchase data) {
                             try {
-                                data.setPurchaseStatus(PurchaseStatus.PROCESSED);
+                                data.setProcessed(true);
                                 logger.info("New event was Processed");
                                 //Do some logic
                                 Thread.sleep(100);

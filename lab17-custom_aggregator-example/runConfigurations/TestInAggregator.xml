@@ -1,9 +1,9 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="TestInAggrgator" type="Application" factoryName="Application">
+  <configuration default="false" name="TestInAggregator" type="Application" factoryName="Application">
     <option name="ALTERNATIVE_JRE_PATH" value="17" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
     <option name="INCLUDE_PROVIDED_SCOPE" value="true" />
-    <option name="MAIN_CLASS_NAME" value="com.gs.TestInAggrgator" />
+    <option name="MAIN_CLASS_NAME" value="com.gs.TestInAggregator" />
     <module name="durable" />
     <option name="VM_PARAMETERS" value="-Dcom.gs.jini_lus.locators=${GS_LOOKUP_LOCATORS} -Dcom.gs.jini_lus.groups=${GS_LOOKUP_GROUPS}" />
     <method v="2">

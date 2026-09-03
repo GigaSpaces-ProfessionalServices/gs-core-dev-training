@@ -1,6 +1,6 @@
 package com.gs.billbuddy.remoting;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

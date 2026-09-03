@@ -40,7 +40,7 @@ public class StudentCourses implements Serializable {
     }
 
     // Routing defaults to @SpaceId (auto-generated), distributing entries randomly across partitions.
-    // This is intentional — the non-colocated model demonstrates the cost of joining types
+    // This is intentional - the non-colocated model demonstrates the cost of joining types
     // whose routing keys do not align, and the benefit of the DYNAMIC_FILTER hint in that scenario.
     @SpaceId(autoGenerate = true)
     public String getId() {

@@ -1,13 +1,13 @@
 gigaspaces:
-  version: 17.1.5
-  home: /home/dixson/gigaspaces-smart-cache-enterprise-17.1.5
+  version: 17.3.0
+  home: /home/dixson/gigaspaces-smart-cache-enterprise-17.3.0
 
 docker:
   username: dixsonhuie1
 
 spring:
   framework:
-    version: 6.2.10
+    version: 7.0.8
   boot:
     version: 3.4.9
 

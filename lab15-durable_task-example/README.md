@@ -54,13 +54,13 @@ For a long-running task, this should be false and `execute()` should be called e
 ### Usage Notes
 * Durable Task extends Distributed Task and includes support for code change.
 * The `execute()` method should be implemented to instruct what to do in each partition.
-* Unlike a regular task, do not call `execute()` directly. For tasks where `isAutoStart()` returns `false`, use `executeDurable(uuid)` instead — this allows the framework to track task status and support cancellation and recovery. For tasks where `isAutoStart()` returns `true`, `execute()` is called automatically by the framework upon registration and after failover.
+* Unlike a regular task, do not call `execute()` directly. For tasks where `isAutoStart()` returns `false`, use `executeDurable(uuid)` instead - this allows the framework to track task status and support cancellation and recovery. For tasks where `isAutoStart()` returns `true`, `execute()` is called automatically by the framework upon registration and after failover.
 
 ## Build and IntelliJ Setup
 1. Change the `gigaspaces.version` in the `pom.xml`. Correct the Space name in all `main()` programs, if needed.
 2. Copy the entire `runConfigurations` folder and its contents from this project, into the `.idea` directory. You will need to restart Intellij.
 3. Make sure the `GS_LOOKUP_LOCATORS` and `GS_LOOKUP_GROUPS` environment variables are set correctly.  
-   For example, the `GS_LOOKUP_LOCATORS=localhost` and `GS_LOOKUP_GROUPS=xap-17.2.1`.
+   For example, the `GS_LOOKUP_LOCATORS=localhost` and `GS_LOOKUP_GROUPS=xap-17.3.0`.
 
    In each of the Intellij run configurations, there will be VM options that will reference these environment variables.
 
