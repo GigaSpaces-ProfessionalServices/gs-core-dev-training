@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:os-core="http://www.openspaces.org/schema/core"
+       xmlns:blob-store="http://www.openspaces.org/schema/off-heap-blob-store"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.openspaces.org/schema/core http://www.openspaces.org/schema/core/openspaces-core.xsd
+       http://www.openspaces.org/schema/off-heap-blob-store http://www.openspaces.org/schema/off-heap-blob-store/openspaces-off-heap-blob-store.xsd">
+
+    <!--
+        The same space as offheapDemo, written out in pu.xml instead of deploy-time properties,
+        because a space filter cannot be registered through those properties:
+          memory-threshold          = space.mx.off-heap.threshold
+          persistent="false"        = space.mx.persistent=false
+          cache-entries-percentage  = space.mx.cache-entries-percentage
+    -->
+    <blob-store:off-heap-blob-store id="offHeapBlobStore" memory-threshold="200m"/>
+
+    <bean id="currencyAuditFilter" class="com.gs.offheap.filter.CurrencyAuditFilter"/>
+
+    <os-core:embedded-space id="space" space-name="offheapWithFilter">
+        <os-core:blob-store-data-policy blob-store-handler="offHeapBlobStore" persistent="false"
+                                        cache-entries-percentage="0"/>
+        <os-core:space-filter>
+            <os-core:filter ref="currencyAuditFilter"/>
+            <!-- 12 = FilterOperationCodes.AFTER_READ_MULTIPLE -->
+            <os-core:operation code="12"/>
+        </os-core:space-filter>
+    </os-core:embedded-space>
+
+</beans>
