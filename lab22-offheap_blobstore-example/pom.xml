@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.gigaspaces.dev.training</groupId>
+    <artifactId>lab22-example</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <repositories>
+        <repository>
+            <id>org.openspaces</id>
+            <url>https://maven-repository.openspaces.org</url>
+        </repository>
+    </repositories>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- GigaSpaces 18.0.1 is built for Java 25, so this lab is too. -->
+        <maven.compiler.release>25</maven.compiler.release>
+        <java.version>25</java.version>
+        <!-- The off-heap read paths shown in this lab need 18.0.1 or later. -->
+        <gigaspaces.version>18.0.1-SNAPSHOT</gigaspaces.version>
+    </properties>
+    <modules>
+        <module>model</module>
+        <module>client</module>
+        <module>filter-space</module>
+    </modules>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.gigaspaces</groupId>
+                <artifactId>xap-openspaces</artifactId>
+                <version>${gigaspaces.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

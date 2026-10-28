@@ -29,6 +29,7 @@ Download the zip from this repository and extract it, preferably to your home di
 | 19 | Distributed Tracing - OpenTelemetry-based tracing with Zipkin as the backend                                                        | `lab19-distributed_tracing-example` |
 | 20 | Billing App - a full blueprint-generated multi-module billing application, deployable locally or to Kubernetes                      | `lab20-billing_app-example` |
 | 21 | Property Storage Adapter - a custom `PropertyStorageAdapter` that transparently compresses an XML property                          | `lab21-storage_adapter-example` |
+| 22 | Off-heap Blobstore - queries, aggregations and space iterators that read values in place instead of building entries (18.0.1+, JDK 25) | `lab22-offheap_blobstore-example` |
 
 ##### Note 1 - Downloading Gigaspaces jars
 
