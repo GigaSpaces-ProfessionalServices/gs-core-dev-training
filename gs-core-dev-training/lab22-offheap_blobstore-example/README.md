@@ -79,7 +79,7 @@ Requires **GigaSpaces 18.0.1 or later** and **JDK 25**. Make sure no other grid 
    In each of the IntelliJ run configurations, there are VM options that reference these environment variables:  
    `-Dcom.gs.jini_lus.locators=${GS_LOOKUP_LOCATORS}` and `-Dcom.gs.jini_lus.groups=${GS_LOOKUP_GROUPS}`.
 
-   Please see the main [README.md](https://github.com/GigaSpaces-ProfessionalServices/gs-core-dev-training/blob/main/README.md) for setting path values (environment variables in File | Settings | Appearance & Behavior | Path Variables) used when running within IntelliJ.
+   Please see the [gs-core-dev-training README.md](https://github.com/GigaSpaces-ProfessionalServices/gs-core-dev-training/blob/main/gs-core-dev-training/README.md) for setting path values (environment variables in File | Settings | Appearance & Behavior | Path Variables) used when running within IntelliJ.
 
 ## Examine the code
 

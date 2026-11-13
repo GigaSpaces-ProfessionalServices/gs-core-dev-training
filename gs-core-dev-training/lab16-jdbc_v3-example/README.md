@@ -25,7 +25,7 @@
    For example,  
    `-Dcom.gs.jini_lus.locators=${GS_LOOKUP_LOCATORS}` and `-Dcom.gs.jini_lus.groups=${GS_LOOKUP_GROUPS}`.
 
-   Please see the main [README.md](https://github.com/GigaSpaces-ProfessionalServices/gs-core-dev-training/blob/main/README.md) for setting path values (environment variables in File | Settings | Appearance & Behavior | Path Values) used when running within Intellij.  
+   Please see the [gs-core-dev-training README.md](https://github.com/GigaSpaces-ProfessionalServices/gs-core-dev-training/blob/main/gs-core-dev-training/README.md) for setting path values (environment variables in File | Settings | Appearance & Behavior | Path Values) used when running within Intellij.  
 5. Build the project: `mvn package`
 6. Run DataGen to write data to the space.
 7. Go to the Ops-Ui at `http://localhost:8090`.

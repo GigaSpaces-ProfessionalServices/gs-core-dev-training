@@ -1,59 +1,53 @@
 # gs-core-dev-training
 
-Before you start please verify that you have on your machine the following:
+This repository contains the labs for GigaSpaces training:
 
-1. `JDK` - Oracle JDK or OpenJDK, preferably version 17.
-1. `Maven`
-1. `Intellij` - this is the preferred Java IDE, although other IDEs will work.
+- [`gs-core-dev-training`](gs-core-dev-training) - Core Developer Training. See [gs-core-dev-training/README.md](gs-core-dev-training/README.md) for prerequisites and development IDE (Maven / IntelliJ) setup.
+- [`gs-admin-training`](gs-admin-training) - Admin Training. For more information see the [course syllabus](https://docs.google.com/spreadsheets/d/10Svq6s90eDw-Ger8TJogyVWLy0FcdfSF3EgtilCd2XY/edit#gid=0).
 
+## Getting the labs
 
-Go to the location where you want lab content to be stored and perform the following:
+Go to the location where you want lab content to be stored and run:
 
-Or:
+```bash
+git clone https://github.com/GigaSpaces-ProfessionalServices/gs-core-dev-training.git
+```
 
-Download the zip from this repository and extract it, preferably to your home directory.
- 
-## Contents
+Or download the zip from this repository and extract it, preferably to your home directory.
 
-| Lab | Topic                                                                                                                               | Directories |
-|----|-------------------------------------------------------------------------------------------------------------------------------------|---|
-| -  | Jupyter notebooks covering the core GigaSpaces API: reads/writes/queries, the Change API, colocated Task execution, and aggregation | `gs-dev-jupyter-lab` |
-| 11 | Space-Based Remoting - broadcast and routed executor remoting patterns against the BillBuddy sample app                             | `lab11-space_based_remoting-exercise`, `lab11-space_based_remoting-solution` |
-| 12 | Event Processing - `@Polling`/`@Notify` event containers                                                                            | `lab12-event_processing-exercise`, `lab12-event_processing-solution` |
-| 13 | Transactions - transactional event processing                                                                                       | `lab13-transactions-exercise`, `lab13-transactions-solution` |
-| 14 | Persistency - Mirror Service, asynchronous persistence to an external database                                                      | `lab14-persistency-exercise`, `lab14-persistency-solution` |
-| 15 | Durable Task - registering a durable, failover-surviving business logic task                                                        | `lab15-durable_task-example` |
-| 16 | JDBC v3 - SQL queries, joins, aggregates, and dynamic DDL/DML via the GigaSpaces JDBC driver                                        | `lab16-jdbc_v3-example` |
-| 17 | Custom Aggregator - a custom `SpaceEntriesAggregator` compared against an equivalent plain SQL query                                | `lab17-custom_aggregator-example` |
-| 18 | Dynamic Filter - the JDBC `DYNAMIC_FILTER` hint and how routing alignment affects colocated joins                                   | `lab18-dynamic_filter-example` |
-| 19 | Distributed Tracing - OpenTelemetry-based tracing with Zipkin as the backend                                                        | `lab19-distributed_tracing-example` |
-| 20 | Billing App - a full blueprint-generated multi-module billing application, deployable locally or to Kubernetes                      | `lab20-billing_app-example` |
-| 21 | Property Storage Adapter - a custom `PropertyStorageAdapter` that transparently compresses an XML property                          | `lab21-storage_adapter-example` |
-| 22 | Off-heap Blobstore - queries, aggregations and space iterators that read values in place instead of building entries (18.0.1+, JDK 25) | `lab22-offheap_blobstore-example` |
+## Core Developer Training labs
 
-##### Note 1 - Downloading Gigaspaces jars
+| Lab | Topic | Features | Directories |
+|-----|-------|----------|-------------|
+| - | Core GigaSpaces API (Jupyter notebooks) | `GigaSpace` write/read/take, `SQLQuery`/`IdQuery`, `SpaceDocument`, Change API (`ChangeSet`), colocated `Task` execution, aggregations | [gs-dev-jupyter-lab](gs-core-dev-training/gs-dev-jupyter-lab) |
+| 11 | Space-Based Remoting | `@RemotingService`, executor remoting (broadcast and `@Routing`-routed), remote result reducers, BillBuddy sample app | [lab11-space_based_remoting-exercise](gs-core-dev-training/lab11-space_based_remoting-exercise)<br>[lab11-space_based_remoting-solution](gs-core-dev-training/lab11-space_based_remoting-solution) |
+| 12 | Event Processing | Event containers: `@Polling` and `@Notify`, event templates, monitoring events | [lab12-event_processing-exercise](gs-core-dev-training/lab12-event_processing-exercise)<br>[lab12-event_processing-solution](gs-core-dev-training/lab12-event_processing-solution) |
+| 13 | Transactions | Transactional event processing, Spring `@Transactional` with the Distributed Transaction Manager, `ChangeSet`, monitoring transactions in GS-UI | [lab13-transactions-exercise](gs-core-dev-training/lab13-transactions-exercise)<br>[lab13-transactions-solution](gs-core-dev-training/lab13-transactions-solution) |
+| 14 | Persistency | Mirror Service, asynchronous persistence (write-behind) to MySQL via Hibernate | [lab14-persistency-exercise](gs-core-dev-training/lab14-persistency-exercise)<br>[lab14-persistency-solution](gs-core-dev-training/lab14-persistency-solution) |
+| 15 | Durable Task | `DurableTask` (extends `DistributedTask`), task survives failover, `@SupportCodeChange` | [lab15-durable_task-example](gs-core-dev-training/lab15-durable_task-example) |
+| 16 | JDBC v3 | GigaSpaces JDBC driver: SQL queries, joins, aggregates, dynamic DDL/DML | [lab16-jdbc_v3-example](gs-core-dev-training/lab16-jdbc_v3-example) |
+| 17 | Custom Aggregator | Custom `SpaceEntriesAggregator`, `AggregationSet`, compared with an equivalent plain SQL query | [lab17-custom_aggregator-example](gs-core-dev-training/lab17-custom_aggregator-example) |
+| 18 | Dynamic Filter | JDBC `DYNAMIC_FILTER` hint, `@SpaceRouting` alignment and colocated joins | [lab18-dynamic_filter-example](gs-core-dev-training/lab18-dynamic_filter-example) |
+| 19 | Distributed Tracing | OpenTelemetry-based tracing of space operations, Zipkin as the backend | [lab19-distributed_tracing-example](gs-core-dev-training/lab19-distributed_tracing-example) |
+| 20 | Billing App | `gs.sh blueprint generate`, multi-module project: `@RemotingService`, `@Polling` containers, REST service, deploy locally or to Kubernetes (Helm) | [lab20-billing_app-example](gs-core-dev-training/lab20-billing_app-example) |
+| 21 | Property Storage Adapter | Custom `PropertyStorageAdapter` with `@SpacePropertyStorageAdapter` to transparently compress an XML property | [lab21-storage_adapter-example](gs-core-dev-training/lab21-storage_adapter-example) |
+| 22 | Off-heap Blobstore | Off-heap blobstore read in place: predicate pushdown, built-in and custom aggregators, space iterators, read-modify-write (18.0.1+, JDK 25) | [lab22-offheap_blobstore-example](gs-core-dev-training/lab22-offheap_blobstore-example) |
 
-Some corporate networks do not allow connecting directly to external Maven repositories. In this case, run:
+## Admin Training labs
 
-`$GS_HOME/bin/gs maven install`
-
-This will copy the GigaSpaces jars (bundled with your installation) to your local .m2 Maven repository.
-
-##### Note 2 - runConfigurations
-
-Many labs will have an instruction to 'Copy the runConfigurations directory to the .idea folder to enable the Java Application configurations.'
-
-The accompanying lab folder will have a runConfigurations directory containing xml files. These are example configurations to run a Java Program from within Intellij. Copy the entire runConfigurations folder into the Intellij .idea folder (the .idea folder gets created when you open the Maven project in Intellj). You will then need to restart Intellij.
-
-You can also set the environment variables used by Intellij. Go to Settings | Appearance & Behavior | Path Variables.
-
-![Intellij environment variables](./Pictures/Picture1.png)
-
-##### Note 3 - Oshi
-If Oshi related errors prevent Gigaspaces from starting, you can disable Oshi by setting in the `bin/setenv-overrides, export GS_OPTIONS_EXT="-Dcom.gs.oshi.enabled=false"`
-
-##### Note 4 - The Gigaspaces processes don't appear under Hosts tab
-In the `bin/setenv-overrides, export GS_OPTIONS_EXT="-Djava.net.preferIPv4Stack=true"`
-
-##### Note 5 - java.lang.UnsatisfiedLinkError with JNA on Mac
-java.lang.UnsatisfiedLinkError on Mac with JNA error. Download the latest jna jar. Replace the lib/optional/oshi/jna.jar with the new jar (remove version from jna.jar). JNA is used to provide host machine information displayed in GigaSpaces.
+| Lab | Topic | Features | Directories |
+|-----|-------|----------|-------------|
+| 01 | GigaSpaces setup and installation | Introduction, start the service grid, one-click install script | [lab01-gs_setup/01-introduction](gs-admin-training/lab01-gs_setup/01-introduction)<br>[lab01-gs_setup/02-one_click_deploy](gs-admin-training/lab01-gs_setup/02-one_click_deploy) |
+| 03 | Application Components | Deploy/test/undeploy a space via CLI, REST v3, SpaceDeck, GS-UI; self-healing | [lab03-application_components](gs-admin-training/lab03-application_components) |
+| 04 | The Bill Buddy Application | Deploy the BillBuddy space, feeders, distributed executor and web app | [lab04-BillBuddy_training_example](gs-admin-training/lab04-BillBuddy_training_example) |
+| 05 | GigaSpaces SpaceDeck | SpaceDeck tour with the ui-demo tool: alerts (CPU, memory, unavailability, no backups), create/remove containers, scale a service | [lab05-spacedeck](gs-admin-training/lab05-spacedeck) |
+| 06 | GigaSpaces Metrics | InfluxDB, Grafana dashboards (Docker) | [lab06-metrics](gs-admin-training/lab06-metrics) |
+| 07 | GigaSpaces Manager | Multi-manager cluster (Docker Compose; older Vagrant version kept), ZooKeeper client example | [lab07-gigaspaces_manager](gs-admin-training/lab07-gigaspaces_manager) |
+| 08 | Hot Deploy Procedure | Update PU code with the custom REST upgrade plugin | [lab08-hot_deploy](gs-admin-training/lab08-hot_deploy) |
+| 09 | Zone-Based Deployment with the CLI | Zoned GSCs, `pu deploy --zones`, verify via `gs.sh` and REST v3 | [lab09-zone_deployment](gs-admin-training/lab09-zone_deployment) |
+| 10 | GigaSpaces REST Manager API | Why REST v3, SpaceDeck on the same API, curl + jq: create GSCs, deploy, load data, relocate, alerts, then automate the build with one script | [lab10-rest_manager_api](gs-admin-training/lab10-rest_manager_api) |
+| 11 | Grid Security | Secured grid, password encryption, roles, secured space | [lab11-security](gs-admin-training/lab11-security) |
+| 12 | MemoryXtend | BillBuddy with RocksDB blobstore, restore from disk | [lab12-memoryxtend](gs-admin-training/lab12-memoryxtend) |
+| 13 | Kubernetes | minikube, Helm charts, operator, vertical scaling | [lab13-kubernetes](gs-admin-training/lab13-kubernetes) |
+| 14 | Storage Optimization | Compare storage types with heap dumps (Eclipse MAT) | [lab14-storage_optimization](gs-admin-training/lab14-storage_optimization) |
+| 15 | GigaSpaces ODSX | Setup, tiered storage, data engine | [lab15-odsx](gs-admin-training/lab15-odsx) |

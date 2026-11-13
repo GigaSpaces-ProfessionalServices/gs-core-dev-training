@@ -68,7 +68,7 @@ In `DataGen.main()`, uncomment `writeData` to populate the space, then re-run wi
    Add the following VM options to the run configuration:  
    `-Dcom.gs.jini_lus.locators=${GS_LOOKUP_LOCATORS}` and `-Dcom.gs.jini_lus.groups=${GS_LOOKUP_GROUPS}`.
 
-   Please see the main [README.md](https://github.com/GigaSpaces-ProfessionalServices/gs-core-dev-training/blob/main/README.md) for setting path values (environment variables in File | Settings | Appearance & Behavior | Path Values) used when running within IntelliJ.
+   Please see the [gs-core-dev-training README.md](https://github.com/GigaSpaces-ProfessionalServices/gs-core-dev-training/blob/main/gs-core-dev-training/README.md) for setting path values (environment variables in File | Settings | Appearance & Behavior | Path Values) used when running within IntelliJ.
 3. Build the project: `mvn package`
 TODO add runConfiguration
 ## Verify the results
