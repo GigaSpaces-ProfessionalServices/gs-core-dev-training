@@ -37,7 +37,7 @@ The hint has no effect on correctness - it is purely an optimization directive. 
    For example,  
    `-Dcom.gs.jini_lus.locators=${GS_LOOKUP_LOCATORS}` and `-Dcom.gs.jini_lus.groups=${GS_LOOKUP_GROUPS}`.
 
-   Please see the main [README.md](https://github.com/GigaSpaces-ProfessionalServices/gs-core-dev-training/blob/main/README.md) for setting path values (environment variables in File | Settings | Appearance & Behavior | Path Values) used when running within Intellij.
+   Please see the [gs-core-dev-training README.md](https://github.com/GigaSpaces-ProfessionalServices/gs-core-dev-training/blob/main/gs-core-dev-training/README.md) for setting path values (environment variables in File | Settings | Appearance & Behavior | Path Values) used when running within Intellij.
 4. Build the project: `mvn package`
 
 ## Instructions
