@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package com.gigaspaces.rest.grpc;
+
+import "space/space_crud.proto";
+import "space/space_admin.proto";
+import "space/space_tasks.proto";
+
+option java_multiple_files = true;
+option java_package = "com.gigaspaces.rest.grpc.proto";
+option java_outer_classname = "SpaceServiceProto";
+
+// The Space gRPC service, assembling every operation group into one client-facing service.
+// Message definitions live in common.proto (shared Value/SpaceDocument), space_crud.proto
+// (write/read/take/clear/count), space_admin.proto (registerType/change/queryExpression) and
+// space_tasks.proto (executeDurableTask) - this file only wires them together.
+service SpaceService {
+  rpc Write(WriteRequest) returns (WriteResponse);
+  rpc WriteMultiple(WriteMultipleRequest) returns (WriteMultipleResponse);
+  rpc RegisterType(RegisterTypeRequest) returns (RegisterTypeResponse);
+  rpc ReadById(ReadByIdRequest) returns (ReadByIdResponse);
+  rpc ReadByIds(ReadByIdsRequest) returns (ReadByIdsResponse);
+  rpc ReadMultiple(ReadMultipleRequest) returns (ReadMultipleResponse);
+  rpc TakeById(TakeByIdRequest) returns (TakeByIdResponse);
+  rpc TakeByIds(TakeByIdsRequest) returns (TakeByIdsResponse);
+  rpc TakeMultiple(TakeMultipleRequest) returns (TakeMultipleResponse);
+  rpc Clear(ClearRequest) returns (ClearResponse);
+  rpc Count(CountRequest) returns (CountResponse);
+  rpc Change(ChangeRequest) returns (ChangeResponse);
+  rpc QueryExpression(QueryExpressionRequest) returns (QueryExpressionResponse);
+  rpc ExecuteDurableTask(ExecuteDurableTaskRequest) returns (ExecuteDurableTaskResponse);
+}

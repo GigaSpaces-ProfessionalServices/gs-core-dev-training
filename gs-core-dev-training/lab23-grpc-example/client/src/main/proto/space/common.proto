@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package com.gigaspaces.rest.grpc;
+
+option java_multiple_files = true;
+option java_package = "com.gigaspaces.rest.grpc.proto";
+option java_outer_classname = "CommonProto";
+
+// Shared building blocks for the Space gRPC API.
+
+// A single typed field value. Only the primitive types needed to prove the
+// end-to-end slice are modeled here; the full type set (Date/BigDecimal/byte
+// arrays/nested documents) is deferred to a later step.
+message Value {
+  oneof kind {
+    string string_value = 1;
+    int64 int64_value = 2;
+    double double_value = 3;
+    bool bool_value = 4;
+  }
+}
+
+// Generic Space Document: a type name plus a bag of named field values,
+// mirroring com.gigaspaces.document.SpaceDocument rather than a fixed POJO.
+message SpaceDocument {
+  string type_name = 1;
+  map<string, Value> properties = 2;
+}

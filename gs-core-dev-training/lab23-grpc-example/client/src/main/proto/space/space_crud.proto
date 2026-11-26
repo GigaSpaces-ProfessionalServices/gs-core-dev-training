@@ -1,0 +1,126 @@
+syntax = "proto3";
+
+package com.gigaspaces.rest.grpc;
+
+import "space/common.proto";
+
+option java_multiple_files = true;
+option java_package = "com.gigaspaces.rest.grpc.proto";
+option java_outer_classname = "SpaceCrudProto";
+
+// Write, read, take, and space-wide maintenance (clear/count) operations.
+
+message WriteRequest {
+  string space_name = 1;
+  SpaceDocument document = 2;
+}
+
+message WriteResponse {
+  // Lease ID assigned by the space (empty for lease-less/persistent writes).
+  string lease_id = 1;
+}
+
+message WriteMultipleRequest {
+  string space_name = 1;
+  repeated SpaceDocument documents = 2;
+}
+
+message WriteMultipleResponse {
+  // One lease ID per input document, same order as WriteMultipleRequest.documents.
+  repeated string lease_ids = 1;
+}
+
+message ReadByIdRequest {
+  string space_name = 1;
+  string type_name = 2;
+  Value id = 3;
+  // Optional; only needed for partitioned spaces whose routing property isn't the ID itself.
+  Value routing = 4;
+}
+
+message ReadByIdResponse {
+  // Unset (default instance) if no matching entry was found - check via has_document.
+  SpaceDocument document = 1;
+}
+
+message ReadByIdsRequest {
+  string space_name = 1;
+  string type_name = 2;
+  repeated Value ids = 3;
+  // Optional single routing value applied to all ids (per-id routing not supported in this slice).
+  Value routing = 4;
+}
+
+message ReadByIdsResponse {
+  // Only entries that were actually found; no null placeholders for misses (unlike
+  // GigaSpace.readByIds' ReadByIdsResult, which preserves per-id null slots).
+  repeated SpaceDocument documents = 1;
+}
+
+message ReadMultipleRequest {
+  string space_name = 1;
+  // By-example template: non-empty fields must match, unset fields are wildcards.
+  SpaceDocument template = 2;
+  // 0 (or unset) means GigaSpace's own default (readMultiple(template), effectively unbounded).
+  int32 max_entries = 3;
+}
+
+message ReadMultipleResponse {
+  repeated SpaceDocument documents = 1;
+}
+
+// Take family mirrors the read family (same request/response shapes), but removes matched
+// entries from the space instead of just returning them.
+
+message TakeByIdRequest {
+  string space_name = 1;
+  string type_name = 2;
+  Value id = 3;
+  Value routing = 4;
+}
+
+message TakeByIdResponse {
+  SpaceDocument document = 1;
+}
+
+message TakeByIdsRequest {
+  string space_name = 1;
+  string type_name = 2;
+  repeated Value ids = 3;
+  Value routing = 4;
+}
+
+message TakeByIdsResponse {
+  repeated SpaceDocument documents = 1;
+}
+
+message TakeMultipleRequest {
+  string space_name = 1;
+  SpaceDocument template = 2;
+  int32 max_entries = 3;
+}
+
+message TakeMultipleResponse {
+  repeated SpaceDocument documents = 1;
+}
+
+message ClearRequest {
+  string space_name = 1;
+  // By-example template; unset (has_template false) clears every entry in the space,
+  // regardless of type.
+  SpaceDocument template = 2;
+}
+
+message ClearResponse {
+}
+
+message CountRequest {
+  string space_name = 1;
+  // By-example template; unset (has_template false) counts every entry in the space,
+  // regardless of type.
+  SpaceDocument template = 2;
+}
+
+message CountResponse {
+  int32 count = 1;
+}
