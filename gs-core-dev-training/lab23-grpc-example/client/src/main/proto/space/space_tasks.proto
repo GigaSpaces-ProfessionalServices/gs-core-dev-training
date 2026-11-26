@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package com.gigaspaces.rest.grpc;
+
+import "space/common.proto";
+
+option java_multiple_files = true;
+option java_package = "com.gigaspaces.rest.grpc.proto";
+option java_outer_classname = "SpaceTasksProto";
+
+// Durable task execution.
+
+// Executes a durable task that was already registered by a Java client via
+// GigaSpace.registerDurableTask - registration itself stays Java-client-only (only doable in
+// Java, since it requires shipping the task's actual bytecode); this only covers triggering
+// an existing registration by id, mirroring GigaSpace.executeDurable(UUID, Object).
+message ExecuteDurableTaskRequest {
+  string space_name = 1;
+  // UUID string as returned by GigaSpace.registerDurableTask() / listed via
+  // GigaSpace.listDurableTasks() (DurableTaskInfo).
+  string task_id = 2;
+  // Optional; passed to DurableTask.execute(Object context) if set.
+  Value context = 3;
+}
+
+message ExecuteDurableTaskResponse {
+  // Best-effort conversion of the task's return value via the same Value oneof used
+  // elsewhere (see its own TODO on unmodeled types) - unset if the task returned null.
+  Value result = 1;
+}

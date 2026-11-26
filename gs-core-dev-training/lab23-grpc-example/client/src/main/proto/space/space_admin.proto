@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+package com.gigaspaces.rest.grpc;
+
+import "space/common.proto";
+
+option java_multiple_files = true;
+option java_package = "com.gigaspaces.rest.grpc.proto";
+option java_outer_classname = "SpaceAdminProto";
+
+// Type registration, change, and query operations.
+
+message RegisterTypeRequest {
+  string space_name = 1;
+  string type_name = 2;
+  // Property name -> Java type name (same accepted formats as the existing
+  // REST v3 RegisterTypeRequest.properties: "String", "int", "Integer", ...).
+  map<string, string> properties = 3;
+  // Property name -> index type: "EQUAL", "ORDERED", "EQUAL_AND_ORDERED".
+  map<string, string> indexes = 4;
+  string routing_property = 5;
+  repeated string id = 6;
+  bool support_dynamic_properties = 7;
+  bool broadcast = 8;
+  bool binary_storage = 9;
+}
+
+message RegisterTypeResponse {
+}
+
+// A single mutation within a Change request, mirroring the existing REST v3 Change API
+// (com.gigaspaces.rest.model.SpaceChangeOperation) - see that class for the full semantics
+// of each op ("set"/"unset"/"increment"/"decrement"/"addToCollection"/"addAllToCollection"/
+// "removeFromCollection"/"putInMap"/"removeFromMap").
+message ChangeOperation {
+  string op = 1;
+  string path = 2;
+  // Unset for "unset" and "removeFromMap" (path/key only, no value).
+  Value value = 3;
+  // Only used by "putInMap"/"removeFromMap".
+  Value key = 4;
+}
+
+message ChangeRequest {
+  string space_name = 1;
+  string type_name = 2;
+  // "sql" (criteria is a SQL WHERE clause string; empty string targets all entries of the
+  // type) or "id" (criteria is the entry's id).
+  string criteria_type = 3;
+  Value criteria = 4;
+  // Optional; only relevant for criteria_type="id" on a partitioned space whose routing
+  // property differs from the id property.
+  Value criteria_routing = 5;
+  repeated ChangeOperation operations = 6;
+}
+
+message ChangeResponse {
+  int64 number_of_changed_entries = 1;
+}
+
+message QueryExpressionRequest {
+  string space_name = 1;
+  string type_name = 2;
+  // SQL WHERE clause, e.g. "status = 'PENDING'"; empty string matches every entry of the type.
+  string expression = 3;
+  // 0 (or unset) means unbounded (GigaSpace.readMultiple(query) without an explicit limit).
+  int32 max_entries = 4;
+}
+
+message QueryExpressionResponse {
+  repeated SpaceDocument documents = 1;
+}

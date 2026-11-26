@@ -32,6 +32,7 @@ Or download the zip from this repository and extract it, preferably to your home
 | 20 | Billing App | `gs.sh blueprint generate`, multi-module project: `@RemotingService`, `@Polling` containers, REST service, deploy locally or to Kubernetes (Helm) | [lab20-billing_app-example](gs-core-dev-training/lab20-billing_app-example) |
 | 21 | Property Storage Adapter | Custom `PropertyStorageAdapter` with `@SpacePropertyStorageAdapter` to transparently compress an XML property | [lab21-storage_adapter-example](gs-core-dev-training/lab21-storage_adapter-example) |
 | 22 | Off-heap Blobstore | Off-heap blobstore read in place: predicate pushdown, built-in and custom aggregators, space iterators, read-modify-write (18.0.1+, JDK 25) | [lab22-offheap_blobstore-example](gs-core-dev-training/lab22-offheap_blobstore-example) |
+| 23 | gRPC SpaceService | Interact with the space in any language through REST v3: generated clients, value mapping, change vs read-modify-write, caveats, native vs gRPC cost | [lab23-grpc-example](gs-core-dev-training/lab23-grpc-example) |
 
 ## Admin Training labs
 
